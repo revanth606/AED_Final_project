@@ -33,9 +33,11 @@ public abstract class Organization {
         IntraCityDriver("IntraCityDriver Organization"),
         User("User Organization");
         private String value;
+        
         private Type(String value) {
             this.value = value;
         }
+        
         public String getValue() {
             return value;
         }
@@ -84,6 +86,5 @@ public abstract class Organization {
     public String toString() {
         return name;
     }
-    
     
 }

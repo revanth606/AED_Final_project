@@ -9,6 +9,8 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
+import Business.WorkQueue.VisitQueue;
+import Business.WorkQueue.VisitRequest;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +21,17 @@ public class EcoSystem extends Organization{
     
     private static EcoSystem business;
     private ArrayList<Network> networkList;
+    private VisitQueue visitQueue = new VisitQueue();
+    
+    
+
+    public VisitQueue getVisitQueue() {
+        return visitQueue;
+    }
+
+    public void setVisitQueue(VisitQueue visitQueue) {
+        this.visitQueue = visitQueue;
+    }
     public static EcoSystem getInstance(){
         if(business==null){
             business=new EcoSystem();

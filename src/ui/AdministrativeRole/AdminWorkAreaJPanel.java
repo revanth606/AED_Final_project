@@ -2,7 +2,12 @@
 
 package ui.AdministrativeRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Organization.UserOrganization;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -12,11 +17,24 @@ import javax.swing.JPanel;
  */
 public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     
-    JPanel userProcessContainer;
-    Enterprise enterprise;
-    /** Creates new form AdminWorkAreaJPanel */
-    public AdminWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise) {
+    private JPanel userProcessContainer;
+    private Organization organization;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    private Network network;
+    private EcoSystem system;
+    /**
+     * Creates new form UserVisitDoctorJPanel
+     */
+    public AdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
+        
+        this.userProcessContainer = userProcessContainer;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.userAccount = account;
+        this.network = network;
+        this.system = system;
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         valueLabel.setText(enterprise.getName());
@@ -36,6 +54,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         manageOrganizationJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
+        btnManageRequests = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -73,6 +92,14 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
         valueLabel.setText("<value>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 130, -1));
+
+        btnManageRequests.setText("jButton1");
+        btnManageRequests.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageRequestsActionPerformed(evt);
+            }
+        });
+        add(btnManageRequests, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
@@ -101,9 +128,17 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
+
+    private void btnManageRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRequestsActionPerformed
+        ManageRequestsJPanel mr = new ManageRequestsJPanel(userProcessContainer, userAccount, enterprise, network, system);
+        userProcessContainer.add("manageOrganizationJPanel", mr);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageRequestsActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnManageRequests;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton manageEmployeeJButton;

@@ -4,6 +4,7 @@
  */
 package ui.UserRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Enterprise.EnterpriseType;
 import static Business.Enterprise.Enterprise.EnterpriseType.Hospital;
@@ -28,10 +29,11 @@ public class UserVisitDoctorJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private Network network;
+    private EcoSystem system;
     /**
      * Creates new form UserVisitDoctorJPanel
      */
-    public UserVisitDoctorJPanel(JPanel userProcessContainer, UserAccount account, UserOrganization organization, Enterprise enterprise, Network network) {
+    public UserVisitDoctorJPanel(JPanel userProcessContainer, UserAccount account, UserOrganization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -39,6 +41,7 @@ public class UserVisitDoctorJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.userAccount = account;
         this.network = network;
+        this.system = system;
         populateComboBox();
     }
 

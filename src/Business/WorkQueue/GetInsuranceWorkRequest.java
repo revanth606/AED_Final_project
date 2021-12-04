@@ -9,7 +9,7 @@ import Business.Medication.Prescription;
 
 /**
  *
- * @author revanthkatha
+ * @author Jashwanth
  */
 public class GetInsuranceWorkRequest extends WorkRequest {
     

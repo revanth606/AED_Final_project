@@ -27,10 +27,11 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private Network network;
+    private EcoSystem system;
     /**
      * Creates new form UserWorkAreaJPanel
      */
-    public UserWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, UserOrganization organization, Enterprise enterprise, Network network) {
+    public UserWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, UserOrganization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -90,7 +91,7 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVisitDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisitDoctorActionPerformed
-        UserVisitDoctorJPanel visitdoc = new UserVisitDoctorJPanel(userProcessContainer, userAccount, organization, enterprise, network);
+        UserVisitDoctorJPanel visitdoc = new UserVisitDoctorJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
         userProcessContainer.add("visitdoc",visitdoc);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

@@ -6,6 +6,7 @@ package ui.DoctorRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.DoctorOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.LabTestWorkRequest;
@@ -24,10 +25,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private DoctorOrganization organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
+    private Network network;
+    private EcoSystem system;
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public DoctorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, DoctorOrganization organization, Enterprise enterprise) {
+    public DoctorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, DoctorOrganization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;

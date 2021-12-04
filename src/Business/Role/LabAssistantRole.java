@@ -6,10 +6,13 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.DoctorOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import ui.LabAssistantRole.LabAssistantWorkAreaJPanel;
 import javax.swing.JPanel;
+import ui.DoctorRole.DoctorWorkAreaJPanel;
 
 /**
  *
@@ -17,9 +20,8 @@ import javax.swing.JPanel;
  */
 public class LabAssistantRole extends Role {
 
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new LabAssistantWorkAreaJPanel(userProcessContainer, account, organization, business);
+   @Override
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+        return new DoctorWorkAreaJPanel(userProcessContainer, account, (DoctorOrganization)organization, enterprise, network, system);
     }
-    
 }
