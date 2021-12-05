@@ -49,13 +49,18 @@ public class ManageRequestsJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
         ArrayList<VisitRequest> vq = system.getVisitQueue().getVisitQueue();
+        String currhospital = enterprise.getName();
         for (VisitRequest req : vq) {
-            Object[] row = new Object[4];
-            row[0] = req.getRequestId();
-            row[1] = req.getStatus();
-            row[2] = req.getMessage();
-            row[3] = req.getMessage();
-            model.addRow(row);
+            System.out.print(req.getUserName());
+            System.out.print(req.getHospital());
+            if (req.getHospital().equals(currhospital)) {
+                Object[] row = new Object[4];
+                row[0] = req.getUserName();
+                row[1] = req.getStatus();
+                row[2] = req.getProblemComment();
+                row[3] = req.getMessage();
+                model.addRow(row);
+            }
         }
     }
 

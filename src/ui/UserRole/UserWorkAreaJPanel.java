@@ -8,6 +8,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.DoctorOrganization;
+import Business.Organization.Organization;
 import Business.Organization.UserOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.LabTestWorkRequest;
@@ -23,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class UserWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private UserOrganization organization;
+    private Organization organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
     private Network network;
@@ -31,7 +32,7 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserWorkAreaJPanel
      */
-    public UserWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, UserOrganization organization, Enterprise enterprise, Network network, EcoSystem system) {
+    public UserWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -39,6 +40,7 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
+        this.system = system;
     }
 
     /**

@@ -11,10 +11,14 @@ import static Business.Enterprise.Enterprise.EnterpriseType.Hospital;
 import Business.Enterprise.HospitalEnterprise;
 import Business.Network.Network;
 import Business.Organization.DoctorOrganization;
+import Business.Organization.Organization;
 import Business.Organization.UserOrganization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.VisitRequest;
 import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
 public class UserVisitDoctorJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private UserOrganization organization;
+    private Organization organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
     private Network network;
@@ -33,7 +37,7 @@ public class UserVisitDoctorJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserVisitDoctorJPanel
      */
-    public UserVisitDoctorJPanel(JPanel userProcessContainer, UserAccount account, UserOrganization organization, Enterprise enterprise, Network network, EcoSystem system) {
+    public UserVisitDoctorJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -71,6 +75,11 @@ public class UserVisitDoctorJPanel extends javax.swing.JPanel {
         CommentTxt.setText("jTextField1");
 
         jButton1.setText("Book Visit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,15 +151,28 @@ public class UserVisitDoctorJPanel extends javax.swing.JPanel {
                 .addGap(154, 154, 154))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String hospital = jcbHospital.getSelectedItem().toString();
+        VisitRequest vq = new VisitRequest();
+        vq.setUserName(userAccount.getUsername());
+        vq.setProblemComment(CommentTxt.getText());
+        vq.setHospital(hospital);
+        System.out.println(vq.getHospital());
+        system.getVisitQueue().getVisitQueue().add(vq);
+        populateTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
-        for (WorkRequest req : organization.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[3];
-            row[0] = req.getRequestId();
-            row[1] = req.getStatus();
-            row[2] = req.getMessage();
+        ArrayList<VisitRequest> vq = system.getVisitQueue().getVisitQueue();
+        for (VisitRequest req : vq) {
+            Object[] row = new Object[4];
+            row[0] = req.getUserName();
+            row[1] = req.getProblemComment();
+            row[3] = req.getProblemComment();
+            row[2] = req.getUserName();
             model.addRow(row);
             
         }

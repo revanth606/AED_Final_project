@@ -33,6 +33,10 @@ public class OrganizationDirectory {
             organization = new LabOrganization();
             organizationList.add(organization);
         }
+        else if (type.getValue().equals(Type.User.getValue())){
+            organization = new UserOrganization();
+            organizationList.add(organization);
+        }
         return organization;
     }
 }

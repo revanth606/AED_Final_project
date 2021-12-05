@@ -28,6 +28,18 @@ public class VisitRequest extends WorkRequest{
     private String finalComment;
     private String status;
     private Prescription prescription;
+    private String hospital;
+
+    public String getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
+    }
+    
+    public VisitRequest() {
+    }
 
     public String getDeliveryComment() {
         return deliveryComment;
@@ -148,7 +160,5 @@ public class VisitRequest extends WorkRequest{
     public void setDeliveryComment(String deliveryComment) {
         this.deliveryComment = deliveryComment;
     }
-
-    
     
 }
