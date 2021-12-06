@@ -10,7 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;    
-import Business.WorkQueue.VisitRequest;
+import Business.WorkQueue.RefillRequest;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author revanthkatha
  */
-public class DeliveryAdminVisitJPanel extends javax.swing.JPanel {
+public class DeliveryAdminRefillJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form DeliveryAdminWareHouseJPanel
@@ -31,11 +31,11 @@ public class DeliveryAdminVisitJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Network network;
     private EcoSystem system;
-    private ArrayList<VisitRequest> currmq;
+    private ArrayList<RefillRequest> currmq;
 //    private Enterprise insurance;
     private Enterprise delivery;
     
-    public DeliveryAdminVisitJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+    public DeliveryAdminRefillJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
@@ -176,7 +176,7 @@ public class DeliveryAdminVisitJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
-        VisitRequest mr = currmq.get(selectedRowIndex);
+        RefillRequest mr = currmq.get(selectedRowIndex);
        
         mr.setStatus("Confirming Order");
         ArrayList<Organization> drivers = enterprise.getOrganizationsbyType(Organization.Type.IntraCityDriver.getValue());
@@ -203,9 +203,15 @@ public class DeliveryAdminVisitJPanel extends javax.swing.JPanel {
         }
         String driver = tblVisits1.getValueAt(selectedRowIndex, 1).toString();
         int requestIndex = (int)tblVisits1.getValueAt(selectedRowIndex, 0);
-        VisitRequest mr = currmq.get(selectedRowIndex);
+        RefillRequest mr = currmq.get(selectedRowIndex);
         mr.setStatus("Out for Delivery");
-        mr.setDeliveryComment(driver);
+        ArrayList<Organization> reqoOrgs = enterprise.getOrganizationsbyType(Organization.Type.IntraCityDriver.getValue());
+        for(Organization org:reqoOrgs){
+            UserAccount ua = org.getUserAccountDirectory().getUserAccountbyUserName(driver);
+            if(ua!=null){
+                mr.setDriver(ua);
+            }
+        }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -223,10 +229,10 @@ public class DeliveryAdminVisitJPanel extends javax.swing.JPanel {
         
         DefaultTableModel model = (DefaultTableModel) tblVisits.getModel();
         model.setRowCount(0);
-        ArrayList<VisitRequest> rq = system.getVisitQueue().getVisitQueue();
+        ArrayList<RefillRequest> rq = system.getVisitQueue().getVisitQueue();
         currmq = new ArrayList<>();
-        for (VisitRequest req : rq) {
-            if (req.getDeliveryName().equals(enterprise.getName())) {
+        for (RefillRequest req : rq) {
+            if (req.getDelivery().getName().equals(enterprise.getName())) {
                 Object[] row = new Object[5];
                 row[0] = req.getRequestId();
                 row[1] = req.getStatus();

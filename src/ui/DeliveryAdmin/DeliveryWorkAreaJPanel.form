@@ -29,7 +29,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnInsurances" max="32767" attributes="0"/>
                           <Component id="btnVisits" max="32767" attributes="0"/>
-                          <Component id="btnInsurances1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnWarehouse" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -50,7 +50,7 @@
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="btnInsurances" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-              <Component id="btnInsurances1" min="-2" max="-2" attributes="0"/>
+              <Component id="btnWarehouse" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="169" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -72,23 +72,26 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnVisits">
       <Properties>
-        <Property name="text" type="java.lang.String" value="First Time Deliveries"/>
+        <Property name="text" type="java.lang.String" value="Hospital Deliveries"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisitsActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnInsurances">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Refill Deliveries"/>
+        <Property name="text" type="java.lang.String" value="Personal Deliveries"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsurancesActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnInsurances1">
+    <Component class="javax.swing.JButton" name="btnWarehouse">
       <Properties>
         <Property name="text" type="java.lang.String" value="Warehouse Deliveries"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsurances1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnWarehouseActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

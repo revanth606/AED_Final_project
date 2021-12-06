@@ -63,26 +63,31 @@ public class DeliveryWorkAreaJPanel extends javax.swing.JPanel {
         valueLabel = new javax.swing.JLabel();
         btnVisits = new javax.swing.JButton();
         btnInsurances = new javax.swing.JButton();
-        btnInsurances1 = new javax.swing.JButton();
+        btnWarehouse = new javax.swing.JButton();
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("EnterPrise :");
 
         valueLabel.setText("<value>");
 
-        btnVisits.setText("First Time Deliveries");
+        btnVisits.setText("Hospital Deliveries");
+        btnVisits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisitsActionPerformed(evt);
+            }
+        });
 
-        btnInsurances.setText("Refill Deliveries");
+        btnInsurances.setText("Personal Deliveries");
         btnInsurances.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsurancesActionPerformed(evt);
             }
         });
 
-        btnInsurances1.setText("Warehouse Deliveries");
-        btnInsurances1.addActionListener(new java.awt.event.ActionListener() {
+        btnWarehouse.setText("Warehouse Deliveries");
+        btnWarehouse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInsurances1ActionPerformed(evt);
+                btnWarehouseActionPerformed(evt);
             }
         });
 
@@ -102,7 +107,7 @@ public class DeliveryWorkAreaJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnInsurances, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnVisits, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnInsurances1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnWarehouse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(336, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -117,29 +122,36 @@ public class DeliveryWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(41, 41, 41)
                 .addComponent(btnInsurances)
                 .addGap(38, 38, 38)
-                .addComponent(btnInsurances1)
+                .addComponent(btnWarehouse)
                 .addContainerGap(169, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsurancesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsurancesActionPerformed
-        DoctorInsuranceJPanel mr = new DoctorInsuranceJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+        DeliveryAdminVisitJPanel mr = new DeliveryAdminVisitJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
         userProcessContainer.add("dcInsJPanel", mr);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnInsurancesActionPerformed
 
-    private void btnInsurances1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsurances1ActionPerformed
+    private void btnWarehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWarehouseActionPerformed
         DeliveryAdminWareHouseJPanel mr = new DeliveryAdminWareHouseJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
         userProcessContainer.add("dcInsJPanel", mr);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnInsurances1ActionPerformed
+    }//GEN-LAST:event_btnWarehouseActionPerformed
+
+    private void btnVisitsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisitsActionPerformed
+        DeliveryAdminVisitJPanel mr = new DeliveryAdminVisitJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+        userProcessContainer.add("dcInsJPanel", mr);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnVisitsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInsurances;
-    private javax.swing.JButton btnInsurances1;
     private javax.swing.JButton btnVisits;
+    private javax.swing.JButton btnWarehouse;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
