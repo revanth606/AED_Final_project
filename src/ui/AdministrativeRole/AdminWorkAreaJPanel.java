@@ -10,6 +10,9 @@ import Business.Organization.UserOrganization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import ui.DeliveryAdmin.DeliveryWorkAreaJPanel;
+import ui.HospitalAdminRole.HospitalAdminJPanel;
+import ui.InsuranceAdminRole.InsuranceAdminJPanel;
 
 /**
  *
@@ -172,13 +175,28 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private void btnManageRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRequestsActionPerformed
         System.out.println(enterprise.getEnterpriseType().getValue());
         if (enterprise.getEnterpriseType().getValue().equals("Hospital")) {
-            ManageVisitsJPanel mr = new ManageVisitsJPanel(userProcessContainer, userAccount, enterprise, network, system);
+            HospitalAdminJPanel mr = new HospitalAdminJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
             userProcessContainer.add("manageVisitsJPanel", mr);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
         } else if (enterprise.getEnterpriseType().getValue().equals("Pharmacy")) {
-            ManageDrugsJPanel md = new ManageDrugsJPanel(userProcessContainer, userAccount, enterprise, network, system);
-            userProcessContainer.add("manageDrugsJPanel", md);
+            AdminPharmacyJPanel ap = new AdminPharmacyJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+            userProcessContainer.add("adminPharmacyJPanel", ap);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        } else if (enterprise.getEnterpriseType().getValue().equals("Insurance")) {
+            InsuranceAdminJPanel ai = new InsuranceAdminJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+            userProcessContainer.add("adminInsuranceJPanel", ai);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        } else if (enterprise.getEnterpriseType().getValue().equals("Delivery")) {
+            DeliveryWorkAreaJPanel ad = new DeliveryWorkAreaJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+            userProcessContainer.add("adminDeliveryJPanel", ad);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        } else if (enterprise.getEnterpriseType().getValue().equals("Manufacturer")) {
+            AdminPharmacyJPanel ap = new AdminPharmacyJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+            userProcessContainer.add("adminPharmacyJPanel", ap);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
         }

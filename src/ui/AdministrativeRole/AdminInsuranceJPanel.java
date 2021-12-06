@@ -27,10 +27,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jessi
  */
-public class ManageOrdersJPanel extends javax.swing.JPanel {
+public class AdminInsuranceJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private UserOrganization organization;
+    private Organization organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
     private Network network;
@@ -40,7 +40,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserVisitDoctorJPanel
      */
-    public ManageOrdersJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, Network network, EcoSystem system) {
+    public AdminInsuranceJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -49,20 +49,18 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.network = network;
         this.system = system;
-        PharmacyEnterprise ent = (PharmacyEnterprise)this.enterprise;
-        this.drugs = ent.getAllDrugs().getDrugDirectory();
         populateTable();
-        populateSalesPersonComboBox();
+        populateAgentComboBox();
     }
     
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblVisits.getModel();
         model.setRowCount(0);
         ArrayList<VisitRequest> vq = system.getVisitQueue().getVisitQueue();
-        String currpharmacy = enterprise.getName();
+        String curragent = enterprise.getName();
         currvq = new ArrayList<>();
         for (VisitRequest req : vq) {
-            if (req.getSalesPersonName().equals(currpharmacy)) {
+            if (req.getAgentName().equals(curragent)) {
                 Object[] row = new Object[5];
                 row[0] = req.getUserName();
                 row[1] = req.getStatus();
@@ -75,13 +73,13 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         }
     }
     
-    private void populateSalesPersonComboBox() {
-        jcbSalesPersons.removeAllItems();
+    private void populateAgentComboBox() {
+        jcbAgents.removeAllItems();
         ArrayList<Organization> orgdir = enterprise.getOrganizationDirectory().getOrganizationList();
         for (Organization org: orgdir) {
-            if (org.getName().equals("SalesPerson Organization")) {
+            if (org.getName().equals("InsuranceAgent Organization")) {
                 for (UserAccount user : org.getUserAccountDirectory().getUserAccountList()) {
-                    jcbSalesPersons.addItem(user.getEmployee().getName());
+                    jcbAgents.addItem(user.getEmployee().getName());
                 }
             }
         }
@@ -99,8 +97,8 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVisits = new javax.swing.JTable();
-        jcbSalesPersons = new javax.swing.JComboBox();
-        lblHospital = new javax.swing.JLabel();
+        jcbAgents = new javax.swing.JComboBox();
+        lblAgent = new javax.swing.JLabel();
         btnAssginSalesPerson = new javax.swing.JButton();
         btnReject = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
@@ -133,9 +131,14 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblVisits);
 
-        jcbSalesPersons.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbAgents.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbAgents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAgentsActionPerformed(evt);
+            }
+        });
 
-        lblHospital.setText("Sales Person :");
+        lblAgent.setText("Agent");
 
         btnAssginSalesPerson.setText("Assign");
         btnAssginSalesPerson.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +169,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
-                        .addComponent(lblHospital))
+                        .addComponent(lblAgent))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -175,7 +178,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                                 .addGap(259, 259, 259)
                                 .addComponent(btnReject))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jcbSalesPersons, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jcbAgents, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(41, 41, 41)
                                 .addComponent(btnAssginSalesPerson))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
@@ -192,8 +195,8 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHospital)
-                    .addComponent(jcbSalesPersons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAgent)
+                    .addComponent(jcbAgents, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAssginSalesPerson))
                 .addContainerGap(249, Short.MAX_VALUE))
         );
@@ -217,8 +220,8 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
             return;
         }
         VisitRequest vq = currvq.get(selectedRowIndex);
-        vq.setSalesPersonComment(jcbSalesPersons.getSelectedItem().toString());
-        vq.setStatus("Salesperson assigned");
+        vq.setAgentComment(jcbAgents.getSelectedItem().toString());
+        vq.setStatus("Agent assigned");
         populateTable();
     }//GEN-LAST:event_btnAssginSalesPersonActionPerformed
 
@@ -228,14 +231,18 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void jcbAgentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAgentsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbAgentsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssginSalesPerson;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReject;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox jcbSalesPersons;
-    private javax.swing.JLabel lblHospital;
+    private javax.swing.JComboBox jcbAgents;
+    private javax.swing.JLabel lblAgent;
     private javax.swing.JTable tblVisits;
     // End of variables declaration//GEN-END:variables
 }

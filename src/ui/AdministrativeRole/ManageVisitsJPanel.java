@@ -48,9 +48,7 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         this.system = system;
         populateDocComboBox();
         populateLabComboBox();
-        populatePharmacyComboBox();
         populateTable();
-//        populateLabRequestTable();
     }
     
     private void populateTable() {
@@ -60,7 +58,7 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         String currhospital = enterprise.getName();
         currvq = new ArrayList<>();
         for (VisitRequest req : vq) {
-            if (req.getHospital().equals(currhospital)) {
+            if (req.getHospitalname().equals(currhospital)) {
                 if (req.getDocUserName()=="") {
                     req.setStatus("Doctor not assigned");
                 }
@@ -100,13 +98,13 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         }
     }
     
-    private void populatePharmacyComboBox() {
-        jcbPharmacy.removeAllItems();
-        ArrayList<Enterprise> enterprises = network.getEnterpriseList(EnterpriseType.Pharmacy);
-        for (Enterprise ent: enterprises) {
-            jcbPharmacy.addItem(ent.getName());
-        }
-    }
+//    private void populatePharmacyComboBox() {
+//        jcbPharmacy.removeAllItems();
+//        ArrayList<Enterprise> enterprises = network.getEnterpriseList(EnterpriseType.Pharmacy);
+//        for (Enterprise ent: enterprises) {
+//            jcbPharmacy.addItem(ent.getName());
+//        }
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
