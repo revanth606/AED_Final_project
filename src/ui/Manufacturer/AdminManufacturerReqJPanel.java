@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  *
  * @author revanthkatha
  */
-public class AdminManufacturerJPanel extends javax.swing.JPanel {
+public class AdminManufacturerReqJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form Actual manufacturing
@@ -33,7 +33,7 @@ public class AdminManufacturerJPanel extends javax.swing.JPanel {
     private ArrayList<WarehouseRequest> currmq;
 //    private Enterprise insurance;
     private Enterprise delivery;
-    public AdminManufacturerJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+    public AdminManufacturerReqJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
