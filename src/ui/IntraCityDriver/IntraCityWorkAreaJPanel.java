@@ -53,12 +53,9 @@ public class IntraCityWorkAreaJPanel extends javax.swing.JPanel {
         currvq = new ArrayList<>();
         for (VisitRequest req : vq) {
             if (req.getDeliveryComment()!=null && req.getDeliveryComment().equals(currdriver)) {
-                Object[] row = new Object[5];
-                row[0] = req.getUserName();
+                Object[] row = new Object[2];
+                row[0] = req.getRequestId();
                 row[1] = req.getStatus();
-                row[2] = req.getDocUserName();
-                row[3] = req.getLabUserName();
-                row[4] = req.getSalesPersonName();
                 model.addRow(row);
                 currvq.add(req);
             }
@@ -77,26 +74,32 @@ public class IntraCityWorkAreaJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVisits = new javax.swing.JTable();
-        btnAssginInsurance = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
-        btnReject = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        btnAssginInsurance1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(197, 228, 246));
+        setLayout(null);
 
         tblVisits.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "RequestId", "Status", "Doc", "Lab", "Salesguy"
+                "RequestId", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -109,61 +112,51 @@ public class IntraCityWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblVisits);
 
-        btnAssginInsurance.setText("Assign");
-        btnAssginInsurance.addActionListener(new java.awt.event.ActionListener() {
+        add(jScrollPane1);
+        jScrollPane1.setBounds(72, 114, 432, 97);
+
+        jLabel2.setText("Comment :");
+        add(jLabel2);
+        jLabel2.setBounds(72, 283, 69, 16);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssginInsuranceActionPerformed(evt);
+                jTextField1ActionPerformed(evt);
             }
         });
+        add(jTextField1);
+        jTextField1.setBounds(194, 278, 290, 26);
 
-        btnBack.setText("<< Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setBackground(new java.awt.Color(0, 153, 255));
+        jButton1.setText("View");
+        add(jButton1);
+        jButton1.setBounds(134, 330, 75, 29);
+
+        jButton2.setBackground(new java.awt.Color(0, 153, 255));
+        jButton2.setText("Save");
+        add(jButton2);
+        jButton2.setBounds(270, 330, 75, 29);
+
+        btnAssginInsurance1.setBackground(new java.awt.Color(0, 153, 255));
+        btnAssginInsurance1.setText("Deliver");
+        btnAssginInsurance1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
+                btnAssginInsurance1ActionPerformed(evt);
             }
         });
+        add(btnAssginInsurance1);
+        btnAssginInsurance1.setBounds(410, 330, 88, 29);
 
-        btnReject.setText("Reject");
-        btnReject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRejectActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(332, 332, 332)
-                        .addComponent(btnAssginInsurance))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnBack)
-                            .addGap(259, 259, 259)
-                            .addComponent(btnReject))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(96, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnReject))
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(btnAssginInsurance)
-                .addContainerGap(209, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/FreightTruck.gif"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAssginInsuranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssginInsuranceActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void btnAssginInsurance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssginInsurance1ActionPerformed
         int selectedRowIndex = tblVisits.getSelectedRow();
         if (selectedRowIndex < 0){
             JOptionPane.showMessageDialog(this, "Request not selected");
@@ -172,31 +165,17 @@ public class IntraCityWorkAreaJPanel extends javax.swing.JPanel {
         VisitRequest vq = currvq.get(selectedRowIndex);
         vq.setStatus("Completed");
         populateTable();
-    }//GEN-LAST:event_btnAssginInsuranceActionPerformed
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
-    }//GEN-LAST:event_btnBackActionPerformed
-
-    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
-        int selectedRowIndex = tblVisits.getSelectedRow();
-        if (selectedRowIndex < 0){
-            JOptionPane.showMessageDialog(this, "Request not selected");
-            return;
-        }
-        VisitRequest vq = currvq.get(selectedRowIndex);
-        vq.setStatus("Request rejected by SalesPerson");
-        populateTable();
-    }//GEN-LAST:event_btnRejectActionPerformed
+    }//GEN-LAST:event_btnAssginInsurance1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAssginInsurance;
-    private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnReject;
+    private javax.swing.JButton btnAssginInsurance1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblVisits;
     // End of variables declaration//GEN-END:variables
 }
