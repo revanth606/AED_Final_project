@@ -64,71 +64,57 @@ public class DeliveryWorkAreaJPanel extends javax.swing.JPanel {
         btnVisits = new javax.swing.JButton();
         btnInsurances = new javax.swing.JButton();
         btnWarehouse = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(197, 228, 246));
+        setLayout(null);
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("EnterPrise :");
+        add(enterpriseLabel);
+        enterpriseLabel.setBounds(21, 27, 127, 30);
 
         valueLabel.setText("<value>");
+        add(valueLabel);
+        valueLabel.setBounds(178, 27, 158, 26);
 
+        btnVisits.setBackground(new java.awt.Color(0, 153, 153));
         btnVisits.setText("Hospital Deliveries");
         btnVisits.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVisitsActionPerformed(evt);
             }
         });
+        add(btnVisits);
+        btnVisits.setBounds(189, 96, 178, 29);
 
+        btnInsurances.setBackground(new java.awt.Color(0, 153, 153));
         btnInsurances.setText("Personal Deliveries");
         btnInsurances.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsurancesActionPerformed(evt);
             }
         });
+        add(btnInsurances);
+        btnInsurances.setBounds(189, 166, 178, 29);
 
+        btnWarehouse.setBackground(new java.awt.Color(0, 153, 153));
         btnWarehouse.setText("Warehouse Deliveries");
         btnWarehouse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWarehouseActionPerformed(evt);
             }
         });
+        add(btnWarehouse);
+        btnWarehouse.setBounds(189, 233, 178, 29);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnInsurances, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnVisits, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnWarehouse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(336, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(btnVisits)
-                .addGap(41, 41, 41)
-                .addComponent(btnInsurances)
-                .addGap(38, 38, 38)
-                .addComponent(btnWarehouse)
-                .addContainerGap(169, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/FreightTruck.gif"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsurancesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsurancesActionPerformed
-        DeliveryAdminVisitJPanel mr = new DeliveryAdminVisitJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+        DeliveryAdminRefillJPanel mr = new DeliveryAdminRefillJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
         userProcessContainer.add("dcInsJPanel", mr);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -153,6 +139,7 @@ public class DeliveryWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnVisits;
     private javax.swing.JButton btnWarehouse;
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
 }

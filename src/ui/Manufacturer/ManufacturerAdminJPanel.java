@@ -54,6 +54,8 @@ public class ManufacturerAdminJPanel extends javax.swing.JPanel {
         btnManageVisit = new javax.swing.JButton();
         btnManageInsurances = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(241, 235, 218));
+
         btnManageVisit.setText("Manage Visit Requests");
         btnManageVisit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
