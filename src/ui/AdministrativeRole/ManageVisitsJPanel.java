@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
 public class ManageVisitsJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private UserOrganization organization;
+    private Organization organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
     private Network network;
@@ -37,7 +37,7 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserVisitDoctorJPanel
      */
-    public ManageVisitsJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, Network network, EcoSystem system) {
+    public ManageVisitsJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -62,12 +62,13 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
                 if (req.getDocUserName()=="") {
                     req.setStatus("Doctor not assigned");
                 }
-                Object[] row = new Object[5];
+                Object[] row = new Object[6];
                 row[0] = req.getUserName();
-                row[1] = req.getStatus();
+                row[1] = req.getProblemComment();
                 row[2] = req.getDocUserName();
                 row[3] = req.getLabUserName();
                 row[4] = req.getSalesPersonName();
+                row[5] = req.getStatus();
                 model.addRow(row);
                 currvq.add(req);
             }
@@ -127,23 +128,27 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         lblPharmacy = new javax.swing.JLabel();
         jcbPharmacy = new javax.swing.JComboBox();
         btnAssginPharmacy = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
 
         jtVisitRequest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "RequestId", "Status", "Doc", "Lab", "Salesguy"
+                "Name", "Compliant", "Doc", "Lab", "Salesguy", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -156,121 +161,86 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jtVisitRequest);
 
+        add(jScrollPane1);
+        jScrollPane1.setBounds(61, 52, 432, 97);
+
         jcbDoctors.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jcbDoctors);
+        jcbDoctors.setBounds(214, 178, 130, 27);
 
         lblHospital.setText("Doctor :");
+        add(lblHospital);
+        lblHospital.setBounds(95, 182, 51, 16);
 
+        btnAssginDoc.setBackground(new java.awt.Color(0, 153, 255));
         btnAssginDoc.setText("Assign");
         btnAssginDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssginDocActionPerformed(evt);
             }
         });
+        add(btnAssginDoc);
+        btnAssginDoc.setBounds(406, 177, 87, 29);
 
+        btnReject.setBackground(new java.awt.Color(255, 102, 102));
         btnReject.setText("Reject");
         btnReject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRejectActionPerformed(evt);
             }
         });
+        add(btnReject);
+        btnReject.setBounds(411, 11, 82, 29);
 
+        btnBack.setBackground(new java.awt.Color(153, 153, 0));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
+        add(btnBack);
+        btnBack.setBounds(55, 11, 97, 29);
 
+        btnAssginLab.setBackground(new java.awt.Color(0, 153, 255));
         btnAssginLab.setText("Assign");
         btnAssginLab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssginLabActionPerformed(evt);
             }
         });
+        add(btnAssginLab);
+        btnAssginLab.setBounds(406, 238, 87, 29);
 
         lblLabAssistant.setText("Lab Assisant :");
+        add(lblLabAssistant);
+        lblLabAssistant.setBounds(95, 243, 88, 16);
 
         jcbLabAssistants.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jcbLabAssistants);
+        jcbLabAssistants.setBounds(214, 239, 130, 27);
 
         lblPharmacy.setText("Pharmacy :");
+        add(lblPharmacy);
+        lblPharmacy.setBounds(95, 315, 68, 16);
 
         jcbPharmacy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jcbPharmacy);
+        jcbPharmacy.setBounds(214, 311, 130, 27);
 
+        btnAssginPharmacy.setBackground(new java.awt.Color(0, 153, 255));
         btnAssginPharmacy.setText("Assign");
         btnAssginPharmacy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssginPharmacyActionPerformed(evt);
             }
         });
+        add(btnAssginPharmacy);
+        btnAssginPharmacy.setBounds(406, 310, 87, 29);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(jcbDoctors, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnAssginDoc))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblPharmacy)
-                                .addGap(72, 72, 72)
-                                .addComponent(jcbPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addComponent(btnAssginPharmacy))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblHospital)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblLabAssistant)
-                                    .addGap(52, 52, 52)
-                                    .addComponent(jcbLabAssistants, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(41, 41, 41)
-                                    .addComponent(btnAssginLab))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(154, 242, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnReject)
-                        .addGap(250, 250, 250))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnReject))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHospital)
-                    .addComponent(jcbDoctors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAssginDoc))
-                .addGap(83, 83, 83)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAssginLab)
-                    .addComponent(lblLabAssistant)
-                    .addComponent(jcbLabAssistants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAssginPharmacy)
-                    .addComponent(lblPharmacy)
-                    .addComponent(jcbPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(135, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/docgloves.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
@@ -280,7 +250,7 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
             return;
         }
         VisitRequest vq = currvq.get(selectedRowIndex);
-        vq.setStatus("Request rejected by HosAdmin");
+        vq.setStatus("Request rejected by Hospital");
         populateTable();
     }//GEN-LAST:event_btnRejectActionPerformed
 
@@ -333,6 +303,7 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAssginPharmacy;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReject;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jcbDoctors;
     private javax.swing.JComboBox jcbLabAssistants;

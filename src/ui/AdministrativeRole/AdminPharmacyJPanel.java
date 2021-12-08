@@ -35,8 +35,6 @@ public class AdminPharmacyJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.network = network;
         this.system = system;
-        this.userProcessContainer = userProcessContainer;
-        this.enterprise = enterprise;
     }
     
     /** This method is called from within the constructor to
@@ -49,44 +47,45 @@ public class AdminPharmacyJPanel extends javax.swing.JPanel {
 
         btnManageRequests = new javax.swing.JButton();
         btnAssignSalesPerson = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
+
+        btnManageRequests.setBackground(new java.awt.Color(0, 153, 153));
         btnManageRequests.setText("Manage Drugs");
         btnManageRequests.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageRequestsActionPerformed(evt);
             }
         });
+        add(btnManageRequests);
+        btnManageRequests.setBounds(200, 150, 170, 29);
 
+        btnAssignSalesPerson.setBackground(new java.awt.Color(0, 153, 153));
         btnAssignSalesPerson.setText("Assign Sales Person");
         btnAssignSalesPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssignSalesPersonActionPerformed(evt);
             }
         });
+        add(btnAssignSalesPerson);
+        btnAssignSalesPerson.setBounds(200, 85, 170, 29);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(btnManageRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(btnAssignSalesPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(212, 212, 212))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(btnAssignSalesPerson)
-                .addGap(43, 43, 43)
-                .addComponent(btnManageRequests)
-                .addContainerGap(190, Short.MAX_VALUE))
-        );
+        jButton1.setBackground(new java.awt.Color(0, 153, 153));
+        jButton1.setText("Order Drugs");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1);
+        jButton1.setBounds(200, 217, 170, 29);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/tabs2.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRequestsActionPerformed
@@ -102,11 +101,20 @@ public class AdminPharmacyJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnAssignSalesPersonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        AdminPharmacyOrderJPanel mo = new AdminPharmacyOrderJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+        userProcessContainer.add("manageOrdersJPanel", mo);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssignSalesPerson;
     private javax.swing.JButton btnManageRequests;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
     
 }

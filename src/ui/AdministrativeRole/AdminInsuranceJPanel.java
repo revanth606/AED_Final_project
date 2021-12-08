@@ -103,6 +103,8 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
         btnReject = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(241, 235, 218));
+
         tblVisits.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -140,6 +142,7 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
 
         lblAgent.setText("Agent");
 
+        btnAssginSalesPerson.setBackground(new java.awt.Color(0, 153, 255));
         btnAssginSalesPerson.setText("Assign");
         btnAssginSalesPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +150,7 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnReject.setBackground(new java.awt.Color(255, 102, 102));
         btnReject.setText("Reject");
         btnReject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +158,7 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBack.setBackground(new java.awt.Color(153, 153, 0));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

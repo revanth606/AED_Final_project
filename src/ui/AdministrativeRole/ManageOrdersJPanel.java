@@ -104,6 +104,10 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         btnAssginSalesPerson = new javax.swing.JButton();
         btnReject = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
 
         tblVisits.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,70 +137,50 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblVisits);
 
+        add(jScrollPane1);
+        jScrollPane1.setBounds(55, 97, 438, 97);
+
         jcbSalesPersons.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jcbSalesPersons);
+        jcbSalesPersons.setBounds(235, 223, 130, 27);
 
         lblHospital.setText("Sales Person :");
+        add(lblHospital);
+        lblHospital.setBounds(95, 227, 86, 16);
 
+        btnAssginSalesPerson.setBackground(new java.awt.Color(0, 153, 255));
         btnAssginSalesPerson.setText("Assign");
         btnAssginSalesPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssginSalesPersonActionPerformed(evt);
             }
         });
+        add(btnAssginSalesPerson);
+        btnAssginSalesPerson.setBounds(406, 222, 87, 29);
 
+        btnReject.setBackground(new java.awt.Color(255, 102, 102));
         btnReject.setText("Reject");
         btnReject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRejectActionPerformed(evt);
             }
         });
+        add(btnReject);
+        btnReject.setBounds(411, 42, 82, 29);
 
+        btnBack.setBackground(new java.awt.Color(153, 153, 0));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
+        add(btnBack);
+        btnBack.setBounds(55, 42, 97, 29);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(lblHospital))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack)
-                                .addGap(259, 259, 259)
-                                .addComponent(btnReject))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jcbSalesPersons, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addComponent(btnAssginSalesPerson))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                .addContainerGap(87, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnReject))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHospital)
-                    .addComponent(jcbSalesPersons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAssginSalesPerson))
-                .addContainerGap(249, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/tabs1.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
@@ -233,6 +217,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAssginSalesPerson;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReject;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jcbSalesPersons;
     private javax.swing.JLabel lblHospital;

@@ -12,6 +12,7 @@ import Business.Network.Network;
 import Business.Organization.UserOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.VisitRequest;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -83,6 +84,10 @@ public class ManageDrugsJPanel extends javax.swing.JPanel {
         lblQuantity = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
         lblPrice = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
 
         tblDrugs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,103 +117,85 @@ public class ManageDrugsJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblDrugs);
 
-        btnBack.setText("<< Back");
+        add(jScrollPane1);
+        jScrollPane1.setBounds(118, 74, 246, 97);
 
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        add(btnBack);
+        btnBack.setBounds(118, 27, 97, 29);
+
+        btnAdd.setBackground(new java.awt.Color(0, 153, 255));
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
+        add(btnAdd);
+        btnAdd.setBounds(342, 389, 75, 29);
 
+        btnUpdate.setBackground(new java.awt.Color(0, 153, 255));
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        add(btnUpdate);
+        btnUpdate.setBounds(184, 389, 88, 29);
 
         lblName.setText("Name");
+        add(lblName);
+        lblName.setBounds(150, 217, 36, 16);
+        add(txtDrugName);
+        txtDrugName.setBounds(263, 212, 101, 26);
 
+        btnView.setBackground(new java.awt.Color(0, 153, 255));
         btnView.setText("View");
         btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewActionPerformed(evt);
             }
         });
+        add(btnView);
+        btnView.setBounds(403, 83, 84, 29);
 
+        btnDelete.setBackground(new java.awt.Color(255, 102, 102));
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        add(btnDelete);
+        btnDelete.setBounds(409, 124, 84, 29);
 
         txtDrugQuantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDrugQuantityActionPerformed(evt);
             }
         });
+        add(txtDrugQuantity);
+        txtDrugQuantity.setBounds(263, 256, 101, 26);
 
         lblQuantity.setText("Quantity");
+        add(lblQuantity);
+        lblQuantity.setBounds(150, 261, 54, 16);
+        add(txtPrice);
+        txtPrice.setBounds(263, 310, 101, 26);
 
         lblPrice.setText("Price");
+        add(lblPrice);
+        lblPrice.setBounds(150, 315, 30, 16);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(79, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBack)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblName)
-                            .addComponent(lblQuantity)
-                            .addComponent(lblPrice))
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDrugName, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                            .addComponent(txtDrugQuantity)
-                            .addComponent(txtPrice))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDelete)
-                            .addComponent(btnView))))
-                .addContainerGap(89, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnUpdate)
-                .addGap(70, 70, 70)
-                .addComponent(btnAdd)
-                .addGap(120, 120, 120))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(btnBack)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblName)
-                    .addComponent(txtDrugName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnView))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(btnDelete)
-                        .addGap(81, 81, 81))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDrugQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblQuantity))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPrice)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 53, 53)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnUpdate))
-                .addContainerGap(79, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/tabs1.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtDrugQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDrugQuantityActionPerformed
@@ -223,15 +210,56 @@ public class ManageDrugsJPanel extends javax.swing.JPanel {
         }
         Drug d = drugs.get(selectedRowIndex);
         txtDrugName.setText(d.getDrugName());
+        if(d.getCost()==0){
+            txtPrice.setText("");
+        }else{
+            txtPrice.setText(String.valueOf(d.getCost()));
+        }
+        if(d.getCost()==0){
+            txtPrice.setText("");
+        }else{
+            txtDrugQuantity.setText(String.valueOf(d.getQuantity()));
+        }
+        
+        
         populateTable();
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        Drug d = new Drug();
-        d.setDrugName(txtDrugName.getText());
-        drugs.add(d);
+        
+        addDrug();
         populateTable();
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRowIndex = tblDrugs.getSelectedRow();
+        if (selectedRowIndex < 0){
+            JOptionPane.showMessageDialog(this, "Drug not selected");
+            return;
+        }
+        drugs.remove(selectedRowIndex);
+        txtDrugName.setText("");
+        txtDrugQuantity.setText("");
+        txtPrice.setText("");
+        populateTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        int selectedRowIndex = tblDrugs.getSelectedRow();
+        if (selectedRowIndex < 0){
+            JOptionPane.showMessageDialog(this, "Drug not selected");
+            return;
+        }
+        drugs.remove(selectedRowIndex);
+        addDrug();
+        populateTable();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -240,6 +268,7 @@ public class ManageDrugsJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnView;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPrice;
@@ -249,4 +278,45 @@ public class ManageDrugsJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtDrugQuantity;
     private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
+
+    private void addDrug() {
+        String drugName = txtDrugName.getText();
+        int price = 0;
+        int quant = 0;
+        if (drugName.equals(null) || drugName.equals("")){
+            JOptionPane.showMessageDialog(this, "Drug name cannot be empty");
+            return;
+        }
+        for(Drug d: drugs){
+            if(d.getDrugName().equals(drugName)){
+                JOptionPane.showMessageDialog(this, "Drug with same name exists, consider modifying it");
+            return;
+            }
+        }
+        try{
+            if(!(txtDrugQuantity.getText().equals("") || txtDrugQuantity.getText()==null)){
+            
+                quant = Integer.valueOf(txtDrugQuantity.getText());
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Quantity must contain integers");
+            return;
+        }
+        try{
+            if(!(txtPrice.getText().equals("") || txtPrice.getText()==null))
+                price = Integer.valueOf(txtPrice.getText());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Price must contain integers");
+            return;
+        }
+        Drug d = new Drug();
+        d.setDrugName(drugName);
+        d.setQuantity(quant);
+        d.setCost(price);
+        drugs.add(d);
+        txtDrugName.setText("");
+        txtDrugQuantity.setText("");
+        txtPrice.setText("");
+    
+    }
 }
