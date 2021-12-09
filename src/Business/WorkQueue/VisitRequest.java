@@ -29,6 +29,10 @@ public class VisitRequest extends WorkRequest{
     private String status;
     private Prescription prescription;
     private String hospital;
+    
+    public VisitRequest() {
+        super();
+    }
 
     public String getHospital() {
         return hospital;
@@ -36,9 +40,6 @@ public class VisitRequest extends WorkRequest{
 
     public void setHospital(String hospital) {
         this.hospital = hospital;
-    }
-    
-    public VisitRequest() {
     }
 
     public String getDeliveryComment() {

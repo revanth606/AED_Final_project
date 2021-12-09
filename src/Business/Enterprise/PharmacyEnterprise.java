@@ -5,6 +5,7 @@
  */
 package Business.Enterprise;
 
+import Business.Medication.DrugDirectory;
 import Business.Role.Role;
 import java.util.ArrayList;
 
@@ -14,12 +15,19 @@ import java.util.ArrayList;
  */
 public class PharmacyEnterprise extends Enterprise {
     
+    private DrugDirectory dd;
+    
     public PharmacyEnterprise(String name){
         super(name,EnterpriseType.Pharmacy);
+        dd = new DrugDirectory();
     }
     @Override
     public ArrayList<Role> getSupportedRole() {
         return null;
+    }
+    
+    public DrugDirectory getAllDrugs() {
+        return dd;
     }
     
 }

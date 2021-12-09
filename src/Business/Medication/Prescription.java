@@ -12,6 +12,13 @@ import java.util.ArrayList;
  * @author revanthkatha
  */
 public class Prescription {
-    private ArrayList<Drug> prescription;
+    private ArrayList<Drug> drugslist;
     
+    public Prescription () {
+        drugslist = new ArrayList<>();
+    }
+    
+    public ArrayList<Drug> getPrescription() {
+        return drugslist;
+    }
 }

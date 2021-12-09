@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  *
  * @author  raunak
  */
-public class AdminWorkAreaJPanel extends javax.swing.JPanel {
+public class AdminPharmacyWorkAreaJPanel extends javax.swing.JPanel {
     
     private JPanel userProcessContainer;
     private Organization organization;
@@ -26,7 +26,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserVisitDoctorJPanel
      */
-    public AdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+    public AdminPharmacyWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -85,7 +85,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
         valueLabel.setText("<value>");
 
-        btnManageRequests.setText("Manage Requests");
+        btnManageRequests.setText("Manage Drugs");
         btnManageRequests.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageRequestsActionPerformed(evt);
@@ -170,18 +170,10 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
 
     private void btnManageRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRequestsActionPerformed
-        System.out.println(enterprise.getEnterpriseType().getValue());
-        if (enterprise.getEnterpriseType().getValue().equals("Hospital")) {
-            ManageVisitsJPanel mr = new ManageVisitsJPanel(userProcessContainer, userAccount, enterprise, network, system);
-            userProcessContainer.add("manageVisitsJPanel", mr);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            layout.next(userProcessContainer);
-        } else if (enterprise.getEnterpriseType().getValue().equals("Pharmacy")) {
-            ManageDrugsJPanel md = new ManageDrugsJPanel(userProcessContainer, userAccount, enterprise, network, system);
-            userProcessContainer.add("manageDrugsJPanel", md);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            layout.next(userProcessContainer);
-        }
+        ManageDrugsJPanel md = new ManageDrugsJPanel(userProcessContainer, userAccount, enterprise, network, system);
+        userProcessContainer.add("manageOrganizationJPanel", md);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageRequestsActionPerformed
     
     

@@ -13,5 +13,18 @@ import java.util.ArrayList;
  */
 public class DrugDirectory {
     private ArrayList<Drug> drugDirectory;
+
+    public DrugDirectory() {
+        drugDirectory = new ArrayList<>();
+    }
+
+    public ArrayList<Drug> getDrugDirectory() {
+        return drugDirectory;
+    }
+
+    public void setDrugDirectory(ArrayList<Drug> drugDirectory) {
+        this.drugDirectory = drugDirectory;
+    }
+    
     
 }

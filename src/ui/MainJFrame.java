@@ -13,6 +13,7 @@ import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import ui.UserRole.UserWorkAreaJPanel;
 
 /**
  *
@@ -157,6 +158,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     }
                     else{
                        inEnterprise=enterprise;
+                       inNetwork = network;
                        break;
                     }
                     if(inOrganization!=null){
@@ -175,7 +177,13 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         else{
             CardLayout layout=(CardLayout)container.getLayout();
+            if((inEnterprise!=null) &&(inEnterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.User.getValue()))){
+                UserWorkAreaJPanel usrwrkarea = new UserWorkAreaJPanel(container, userAccount, inOrganization, inEnterprise, inNetwork, system);
+                container.add("workArea", usrwrkarea);
+            }else{
+                System.out.println();
             container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system));
+            }
             layout.next(container);
         }
         

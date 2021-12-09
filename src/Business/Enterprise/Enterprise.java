@@ -26,7 +26,7 @@ public abstract class Enterprise extends Organization{
         Insurance("Insurance"),
         Pharmacy("Pharmacy"),
         Delivery("Delivery"),
-        Manufacturer("Delivery"),
+        Manufacturer("Manufacturer"),
         User("User");
         
         private String value;
