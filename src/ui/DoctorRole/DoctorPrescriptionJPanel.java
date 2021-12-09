@@ -60,10 +60,7 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
     public void populatePrescription() {
         DefaultTableModel model = (DefaultTableModel) tblPrescription.getModel();
         model.setRowCount(0);
-        ArrayList<Drug> prevpres = vr.getPrescription().getPrescription();
-        if (prevpres.size()==0) {
-            prevpres = new ArrayList<>();
-        }
+        ArrayList<Drug> prevpres = vr.getPrescription().getList();
         for (Drug d : prevpres) {
             Object[] row = new Object[1];
             row[0] = d.getDrugName();
@@ -88,6 +85,7 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
             row[0] = drug.getDrugName();
             model.addRow(row);
         }
+        
     }
     
     private void populateComboBox() {
@@ -208,14 +206,6 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(lblPharmacy)
-                .addGap(72, 72, 72)
-                .addComponent(jcbPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(btnAssginPharmacy)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -224,17 +214,25 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2)
                         .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(btnBack)
-                .addGap(208, 208, 208)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnPrescribe)
-                        .addContainerGap(131, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAdd)
-                        .addGap(137, 137, 137))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(lblPharmacy)
+                        .addGap(72, 72, 72)
+                        .addComponent(jcbPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnAssginPharmacy))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(btnBack)
+                        .addGap(208, 208, 208)
+                        .addComponent(btnPrescribe)))
+                .addContainerGap(112, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnAdd)
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,7 +270,7 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
         Object[] row = new Object[1];
         row[0] = drugs.getDrugDirectory().get(selectedRowIndex).getDrugName();
         model.addRow(row);
-        if (dlist.size()==0) {
+        if (dlist==null) {
             dlist = new ArrayList<>();
         }
         dlist.add(drugs.getDrugDirectory().get(selectedRowIndex));
@@ -281,9 +279,10 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
     private void btnPrescribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrescribeActionPerformed
         Prescription pres = new Prescription();
         for (Drug d : dlist) {
-            pres.getPrescription().add(d);
+            pres.getList().add(d);
         }
         vr.setPrescription(pres);
+        vr.setSalesPersonName(jcbPharmacy.getSelectedItem().toString());
     }//GEN-LAST:event_btnPrescribeActionPerformed
 
 
