@@ -14,6 +14,8 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.VisitRequest;
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -200,6 +202,11 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
         });
 
         btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -284,6 +291,12 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
         vr.setPrescription(pres);
         vr.setSalesPersonName(jcbPharmacy.getSelectedItem().toString());
     }//GEN-LAST:event_btnPrescribeActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

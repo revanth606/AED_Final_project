@@ -93,7 +93,7 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVisitDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisitDoctorActionPerformed
-        UserVisitDoctorJPanel visitdoc = new UserVisitDoctorJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+        UserVisitRequestJPanel visitdoc = new UserVisitRequestJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
         userProcessContainer.add("visitdoc",visitdoc);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

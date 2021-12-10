@@ -50,7 +50,7 @@ public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblVisits.getModel();
         model.setRowCount(0);
         ArrayList<VisitRequest> vq = system.getVisitQueue().getVisitQueue();
-        String currsalesperson = enterprise.getName();
+        String currsalesperson = userAccount.getEmployee().getName();
         currvq = new ArrayList<>();
         for (VisitRequest req : vq) {
             if (req.getSalesPersonComment()!=null && req.getSalesPersonComment().equals(currsalesperson)) {
