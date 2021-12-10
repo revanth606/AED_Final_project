@@ -10,6 +10,7 @@ import Business.Network.Network;
 import Business.Organization.DoctorOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.InsuranceRequest;
 import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.VisitQueue;
 import Business.WorkQueue.VisitRequest;
@@ -24,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author raunak
  */
-public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
+public class DoctorInsuranceJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private Organization organization;
@@ -32,11 +33,11 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Network network;
     private EcoSystem system;
-    private ArrayList<VisitRequest> currvq;
+    private ArrayList<InsuranceRequest> curriq;
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public DoctorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+    public DoctorInsuranceJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -52,19 +53,19 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     public void populateRequestTable(){
         DefaultTableModel model = (DefaultTableModel) tblVisitRequests.getModel();
         model.setRowCount(0);
-        ArrayList<VisitRequest> vq = system.getVisitQueue().getVisitQueue();
+        ArrayList<InsuranceRequest> iq = system.getInsuranceQueue().getInsuranceQueue();
         String doc = userAccount.getUsername();
-        currvq = new ArrayList<>();
-        for (VisitRequest req : vq) {
-            if (req.getDocUserName().equals(doc)) {
+        curriq = new ArrayList<>();
+        for (InsuranceRequest req : iq) {
+            if (req.getDoctor().getUsername().equals(doc)) {
                 Object[] row = new Object[5];
-                row[0] = req.getUserName();
+                row[0] = req.getRequestId();
                 row[1] = req.getStatus();
-                row[2] = req.getDocUserName();
-                row[3] = req.getLabUserName();
-                row[4] = req.getSalesPersonName();
+                row[2] = req.getDoctorComment();
+                row[3] = req.getInsuranceComment();
+                row[4] = req.getTestResult();
                 model.addRow(row);
-                currvq.add(req);
+                curriq.add(req);
             }
         }
     }
@@ -89,7 +90,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         lblResults = new javax.swing.JLabel();
         lblProblem = new javax.swing.JLabel();
-        btnViewPrescription = new javax.swing.JButton();
+        btnApprove = new javax.swing.JButton();
+        btnReject = new javax.swing.JButton();
 
         tblVisitRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -154,10 +156,17 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         lblProblem.setText("Comment");
 
-        btnViewPrescription.setText("View Prescription");
-        btnViewPrescription.addActionListener(new java.awt.event.ActionListener() {
+        btnApprove.setText("Approve");
+        btnApprove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewPrescriptionActionPerformed(evt);
+                btnApproveActionPerformed(evt);
+            }
+        });
+
+        btnReject.setText("Reject");
+        btnReject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRejectActionPerformed(evt);
             }
         });
 
@@ -166,70 +175,71 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(173, 173, 173)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(refreshTestJButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(99, 99, 99)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnReqTest)
+                                .addGap(56, 56, 56)
+                                .addComponent(btnApprove)
+                                .addGap(97, 97, 97)
+                                .addComponent(btnReject))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblProblem)
                                 .addGap(28, 28, 28)
-                                .addComponent(txtProblem, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
+                                .addComponent(txtProblem, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41)
                                 .addComponent(lblResults)
                                 .addGap(28, 28, 28)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(btnReqTest)
-                        .addGap(128, 128, 128)
-                        .addComponent(btnViewPrescription)))
-                .addContainerGap(103, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(refreshTestJButton)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(refreshTestJButton))
+                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(90, 90, 90)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProblem)
+                    .addComponent(txtProblem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblResults)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReqTest)
-                    .addComponent(btnViewPrescription))
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtProblem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblProblem))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblResults)))
-                .addContainerGap(114, Short.MAX_VALUE))
+                    .addComponent(btnApprove)
+                    .addComponent(btnReject))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReqTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReqTestActionPerformed
-        
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestLabTestJPanel", new RequestLabTestJPanel(userProcessContainer, userAccount, enterprise));
-        layout.next(userProcessContainer);
-        
+        int selectedRowIndex = tblVisitRequests.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Request not selected");
+            return;
+        }
+        InsuranceRequest ir = curriq.get(selectedRowIndex);
+        ir.setStatus("Lab Test Requested");
     }//GEN-LAST:event_btnReqTestActionPerformed
 
     private void refreshTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTestJButtonActionPerformed
-
         populateRequestTable();
         
     }//GEN-LAST:event_refreshTestJButtonActionPerformed
@@ -238,21 +248,32 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProblemActionPerformed
 
-    private void btnViewPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewPrescriptionActionPerformed
+    private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
         int selectedRowIndex = tblVisitRequests.getSelectedRow();
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
-        VisitRequest visitrequest = currvq.get(selectedRowIndex);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestLabTestJPanel", new DoctorPrescriptionJPanel(userProcessContainer, userAccount, organization, enterprise, network, system, visitrequest));
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnViewPrescriptionActionPerformed
+        InsuranceRequest ir = curriq.get(selectedRowIndex);
+        ir.setDoctorComment(txtProblem.getText());
+        ir.setStatus("Doctor Approved");
+    }//GEN-LAST:event_btnApproveActionPerformed
+
+    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
+        int selectedRowIndex = tblVisitRequests.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Request not selected");
+            return;
+        }
+        InsuranceRequest ir = curriq.get(selectedRowIndex);
+        ir.setDoctorComment(txtProblem.getText());
+        ir.setStatus("Docotor Rejected");
+    }//GEN-LAST:event_btnRejectActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnApprove;
+    private javax.swing.JButton btnReject;
     private javax.swing.JButton btnReqTest;
-    private javax.swing.JButton btnViewPrescription;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;

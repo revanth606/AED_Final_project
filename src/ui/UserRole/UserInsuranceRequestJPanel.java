@@ -12,7 +12,6 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.InsuranceRequest;
-import Business.WorkQueue.VisitRequest;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -175,7 +174,7 @@ public class UserInsuranceRequestJPanel extends javax.swing.JPanel {
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
-        ArrayList<InsuranceRequest> iq = system.getVisitQueue().getVisitQueue();
+        ArrayList<InsuranceRequest> iq = system.getInsuranceQueue().getInsuranceQueue();
         for (InsuranceRequest req : iq) {
             Object[] row = new Object[4];
             row[0] = req.getUser().getEmployee().getName();
@@ -189,7 +188,7 @@ public class UserInsuranceRequestJPanel extends javax.swing.JPanel {
     private void populateComboBox() {
         
         jcbInsurance.removeAllItems();
-        ArrayList<Enterprise> ins = network.getEnterpriseList(EnterpriseType.Hospital);
+        ArrayList<Enterprise> ins = network.getEnterpriseList(EnterpriseType.Insurance);
         for(Enterprise e : ins){
             jcbInsurance.addItem(e.getName());
             insurances.add((InsuranceEnterprise)e);

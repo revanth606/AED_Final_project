@@ -64,6 +64,11 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnGetInsurance.setText("Insurance");
+        btnGetInsurance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGetInsuranceActionPerformed(evt);
+            }
+        });
 
         btnRefill.setText("Get Refills");
 
@@ -98,6 +103,13 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnVisitDoctorActionPerformed
+
+    private void btnGetInsuranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetInsuranceActionPerformed
+        UserInsuranceRequestJPanel insreq = new UserInsuranceRequestJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+        userProcessContainer.add("insurance", insreq);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnGetInsuranceActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

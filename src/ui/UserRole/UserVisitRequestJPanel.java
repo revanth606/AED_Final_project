@@ -34,7 +34,7 @@ public class UserVisitRequestJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Network network;
     private EcoSystem system;
-    private ArrayList<HospitalEnterprise> hospitals;
+    private ArrayList<Enterprise> hospitals = new ArrayList<>();
     /**
      * Creates new form UserVisitDoctorJPanel
      */
@@ -49,7 +49,6 @@ public class UserVisitRequestJPanel extends javax.swing.JPanel {
         this.system = system;
         populateComboBox();
         populateTable();
-        this.hospitals = new ArrayList<>();
     }
 
     /**
@@ -167,7 +166,7 @@ public class UserVisitRequestJPanel extends javax.swing.JPanel {
         vr.setHospitalname(hospital);
         system.getVisitQueue().getVisitQueue().add(vr);
         vr.setUser(userAccount);
-        for (HospitalEnterprise hos : hospitals) {
+        for (Enterprise hos : hospitals) {
             if (hos.getName().equals(jcbHospital.getSelectedItem().toString())) {
                 vr.setHospital(hos);
             }
@@ -195,12 +194,11 @@ public class UserVisitRequestJPanel extends javax.swing.JPanel {
     }
 
     private void populateComboBox() {
-        
         jcbHospital.removeAllItems();
         ArrayList<Enterprise> hosp = network.getEnterpriseList(EnterpriseType.Hospital);
         for(Enterprise e : hosp){
             jcbHospital.addItem(e.getName());
-            hospitals.add((HospitalEnterprise)e);
+            hospitals.add(e);
         }
         
     }

@@ -7,18 +7,11 @@ package ui.UserRole;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Enterprise.EnterpriseType;
-import static Business.Enterprise.Enterprise.EnterpriseType.Hospital;
-import Business.Enterprise.HospitalEnterprise;
 import Business.Network.Network;
-import Business.Organization.DoctorOrganization;
 import Business.Organization.Organization;
-import Business.Organization.UserOrganization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.VisitRequest;
-import Business.WorkQueue.WorkRequest;
+import Business.WorkQueue.RefillRequest;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jessi
  */
-public class UserVisitDoctorJPanel extends javax.swing.JPanel {
+public class UserRefillRequestJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private Organization organization;
@@ -34,10 +27,11 @@ public class UserVisitDoctorJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Network network;
     private EcoSystem system;
+    private ArrayList<Enterprise> pharmacies = new ArrayList<>();
     /**
      * Creates new form UserVisitDoctorJPanel
      */
-    public UserVisitDoctorJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+    public UserRefillRequestJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -47,6 +41,7 @@ public class UserVisitDoctorJPanel extends javax.swing.JPanel {
         this.network = network;
         this.system = system;
         populateComboBox();
+        populateTable();
     }
 
     /**
@@ -59,25 +54,29 @@ public class UserVisitDoctorJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         lblHospital = new javax.swing.JLabel();
-        jcbHospital = new javax.swing.JComboBox();
+        jcbInsurance = new javax.swing.JComboBox();
         CommentJLabel = new javax.swing.JLabel();
         CommentTxt = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnBookVisit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
 
-        lblHospital.setText("Hospital Name :");
+        lblHospital.setText("Insurance  Name :");
 
-        jcbHospital.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbInsurance.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         CommentJLabel.setText("Comment :");
 
-        CommentTxt.setText("jTextField1");
-
-        jButton1.setText("Book Visit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        CommentTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                CommentTxtActionPerformed(evt);
+            }
+        });
+
+        btnBookVisit.setText("Book Visit");
+        btnBookVisit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBookVisitActionPerformed(evt);
             }
         });
 
@@ -122,11 +121,11 @@ public class UserVisitDoctorJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbHospital, 0, 132, Short.MAX_VALUE)
+                            .addComponent(jcbInsurance, 0, 120, Short.MAX_VALUE)
                             .addComponent(CommentTxt))
                         .addGap(108, 108, 108))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBookVisit, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
@@ -136,54 +135,62 @@ public class UserVisitDoctorJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHospital)
-                    .addComponent(jcbHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbInsurance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CommentJLabel)
                     .addComponent(CommentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(154, 154, 154))
+                .addComponent(btnBookVisit)
+                .addContainerGap(154, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String hospital = jcbHospital.getSelectedItem().toString();
-        VisitRequest vq = new VisitRequest();
-        vq.setUserName(userAccount.getUsername());
-        vq.setProblemComment(CommentTxt.getText());
-        vq.setHospital(hospital);
-        System.out.println(vq.getHospital());
-        system.getVisitQueue().getVisitQueue().add(vq);
+    private void btnBookVisitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookVisitActionPerformed
+        String pharmacy = jcbInsurance.getSelectedItem().toString();
+        RefillRequest rr = new RefillRequest();
+        rr.setUser(userAccount);
+        rr.setUserComment(CommentTxt.getText());
+        system.getRefillQueue().getRefillQueue().add(rr);
+        rr.setUser(userAccount);
+        for (Enterprise phs : pharmacies) {
+            if (phs.getName().equals(jcbInsurance.getSelectedItem().toString())) {
+                rr.setPharmacy(phs);
+            }
+        }
         populateTable();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBookVisitActionPerformed
+
+    private void CommentTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommentTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CommentTxtActionPerformed
     
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
-        ArrayList<VisitRequest> vq = system.getVisitQueue().getVisitQueue();
-        for (VisitRequest req : vq) {
+        ArrayList<RefillRequest> rr = system.getRefillQueue().getRefillQueue();
+        for (RefillRequest req : rr) {
             Object[] row = new Object[4];
-            row[0] = req.getUserName();
-            row[1] = req.getProblemComment();
-            row[3] = req.getProblemComment();
-            row[2] = req.getUserName();
+            row[0] = req.getUser().getEmployee().getName();
+            row[1] = req.getStatus();
+            row[2] = req.getSalesPerson().getEmployee().getName();
+            row[3] = req.getSalesPersonComment();
             model.addRow(row);
-            
         }
     }
 
     private void populateComboBox() {
         
-        jcbHospital.removeAllItems();
-        ArrayList<Enterprise> hosp = network.getEnterpriseList(EnterpriseType.Hospital);
-        for(Enterprise e : hosp){
-            jcbHospital.addItem(e.getName());
+        jcbInsurance.removeAllItems();
+        ArrayList<Enterprise> ins = network.getEnterpriseList(EnterpriseType.Pharmacy);
+        for(Enterprise e : ins){
+            jcbInsurance.addItem(e.getName());
+            pharmacies.add(e);
         }
         
     }
@@ -192,9 +199,9 @@ public class UserVisitDoctorJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CommentJLabel;
     private javax.swing.JTextField CommentTxt;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnBookVisit;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox jcbHospital;
+    private javax.swing.JComboBox jcbInsurance;
     private javax.swing.JLabel lblHospital;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
