@@ -4,17 +4,38 @@
  */
 package ui.HospitalAdminRole;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author jessi
  */
 public class HospitalAdminJPanel extends javax.swing.JPanel {
 
+    private JPanel userProcessContainer;
+    private Organization organization;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    private Network network;
+    private EcoSystem system;
     /**
      * Creates new form HospitalAdminJPanel
      */
-    public HospitalAdminJPanel() {
+    public HospitalAdminJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
+        
+        this.userProcessContainer = userProcessContainer;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.userAccount = account;
+        this.network = network;
+        this.system = system;
     }
 
     /**
@@ -26,11 +47,8 @@ public class HospitalAdminJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnManageEnterprise = new javax.swing.JButton();
         btnManageWorkRequests = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-
-        btnManageEnterprise.setText("Manage Enterprise");
+        btnInsurance = new javax.swing.JButton();
 
         btnManageWorkRequests.setText("Manage Visit Requests");
         btnManageWorkRequests.addActionListener(new java.awt.event.ActionListener() {
@@ -39,7 +57,12 @@ public class HospitalAdminJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Manage Health Checks");
+        btnInsurance.setText("Manage Health Checks");
+        btnInsurance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsuranceActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -48,21 +71,18 @@ public class HospitalAdminJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnManageEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnManageWorkRequests, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnInsurance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(263, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(btnManageEnterprise)
-                .addGap(45, 45, 45)
+                .addGap(142, 142, 142)
                 .addComponent(btnManageWorkRequests)
-                .addGap(45, 45, 45)
-                .addComponent(jButton1)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(btnInsurance)
+                .addContainerGap(268, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -70,10 +90,16 @@ public class HospitalAdminJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnManageWorkRequestsActionPerformed
 
+    private void btnInsuranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsuranceActionPerformed
+        HospitalAdminInsuranceJPanel mr = new HospitalAdminInsuranceJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+        userProcessContainer.add("manageVisitsJPanel", mr);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnInsuranceActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnManageEnterprise;
+    private javax.swing.JButton btnInsurance;
     private javax.swing.JButton btnManageWorkRequests;
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

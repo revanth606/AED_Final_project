@@ -10,7 +10,6 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.RefillRequest;
-import Business.WorkQueue.VisitRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -228,8 +227,13 @@ public class SalesPersonRefillRequestJPanel extends javax.swing.JPanel {
             return;
         }
         RefillRequest rr = currrq.get(selectedRowIndex);
-//        rr.setAgentName(jcbInsurance.getSelectedItem().toString());
-        rr.setStatus("Waiting for Insurance approval");
+        ArrayList<Enterprise> enterprises = network.getEnterpriseList(Enterprise.EnterpriseType.Insurance);
+        for (Enterprise ent: enterprises) {
+            if(ent.getName().equals(jcbInsurance.getSelectedItem().toString())) {
+                rr.setInsurance(ent);
+            }
+        }
+        rr.setStatus("Insurance company selected");
         populateTable();
     }//GEN-LAST:event_btnAssginInsuranceActionPerformed
 
@@ -239,9 +243,14 @@ public class SalesPersonRefillRequestJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
-        RefillRequest vq = currrq.get(selectedRowIndex);
-//        vq.setDeliveryName(jcbDelivery.getSelectedItem().toString());
-        vq.setStatus("Sent to Delivery");
+        RefillRequest rr = currrq.get(selectedRowIndex);
+        ArrayList<Enterprise> enterprises = network.getEnterpriseList(Enterprise.EnterpriseType.Delivery);
+        for (Enterprise ent: enterprises) {
+            if(ent.getName().equals(jcbDelivery.getSelectedItem().toString())) {
+                rr.setDelivery(ent);
+            }
+        }
+        rr.setStatus("Delivery company selected");
         populateTable();
     }//GEN-LAST:event_btnAssginDeliveryActionPerformed
 

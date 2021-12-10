@@ -4,18 +4,12 @@
  */
 package ui.HospitalAdminRole;
 
-import ui.AdministrativeRole.*;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
-import Business.Enterprise.Enterprise.EnterpriseType;
 import Business.Network.Network;
 import Business.Organization.Organization;
-import Business.Organization.OrganizationDirectory;
-import Business.Organization.UserOrganization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.VisitQueue;
-import Business.WorkQueue.VisitRequest;
-import Business.WorkQueue.WorkRequest;
+import Business.WorkQueue.InsuranceRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -29,16 +23,16 @@ import javax.swing.table.DefaultTableModel;
 public class HospitalAdminInsuranceJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private UserOrganization organization;
+    private Organization organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
     private Network network;
     private EcoSystem system;
-    private ArrayList<VisitRequest> currvq;
+    private ArrayList<InsuranceRequest> currvq;
     /**
      * Creates new form UserVisitDoctorJPanel
      */
-    public HospitalAdminInsuranceJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, Network network, EcoSystem system) {
+    public HospitalAdminInsuranceJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -55,20 +49,13 @@ public class HospitalAdminInsuranceJPanel extends javax.swing.JPanel {
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) jtVisitRequest.getModel();
         model.setRowCount(0);
-        ArrayList<VisitRequest> vq = system.getVisitQueue().getVisitQueue();
-        String currhospital = enterprise.getName();
+        ArrayList<InsuranceRequest> iq = system.getInsuranceQueue().getInsuranceQueue();
         currvq = new ArrayList<>();
-        for (VisitRequest req : vq) {
-            if (req.getHospitalname().equals(currhospital)) {
-                if (req.getDocUserName()=="") {
-                    req.setStatus("Doctor not assigned");
-                }
-                Object[] row = new Object[5];
-                row[0] = req.getUserName();
+        for (InsuranceRequest req : iq) {
+            if (req.getHospital().getName().equals(enterprise.getName())) {
+                Object[] row = new Object[2];
+                row[0] = req.getRequestId();
                 row[1] = req.getStatus();
-                row[2] = req.getDocUserName();
-                row[3] = req.getLabUserName();
-                row[4] = req.getSalesPersonName();
                 model.addRow(row);
                 currvq.add(req);
             }
@@ -249,7 +236,7 @@ public class HospitalAdminInsuranceJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
-        VisitRequest vq = currvq.get(selectedRowIndex);
+        InsuranceRequest vq = currvq.get(selectedRowIndex);
         vq.setStatus("Request rejected by HosAdmin");
         populateTable();
     }//GEN-LAST:event_btnRejectActionPerformed
@@ -260,8 +247,14 @@ public class HospitalAdminInsuranceJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
-        VisitRequest vq = currvq.get(selectedRowIndex);
-        vq.setDocUserName(jcbDoctors.getSelectedItem().toString());
+        InsuranceRequest vq = currvq.get(selectedRowIndex);
+        ArrayList<Organization> reqoOrgs = enterprise.getOrganizationsbyType(Organization.Type.Doctor.getValue());
+        for(Organization org:reqoOrgs){
+            UserAccount ua = org.getUserAccountDirectory().getUserAccountbyUserName(jcbDoctors.getSelectedItem().toString());
+            if(ua!=null){
+                vq.setDoctor(ua);
+            }
+        }
         vq.setStatus("Doctor Assigned");
         populateTable();
     }//GEN-LAST:event_btnAssginDocActionPerformed
@@ -278,8 +271,14 @@ public class HospitalAdminInsuranceJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
-        VisitRequest vq = currvq.get(selectedRowIndex);
-        vq.setLabUserName(jcbLabAssistants.getSelectedItem().toString());
+        InsuranceRequest vq = currvq.get(selectedRowIndex);
+        ArrayList<Organization> reqoOrgs = enterprise.getOrganizationsbyType(Organization.Type.Lab.getValue());
+        for(Organization org:reqoOrgs){
+            UserAccount ua = org.getUserAccountDirectory().getUserAccountbyUserName(jcbLabAssistants.getSelectedItem().toString());
+            if(ua!=null){
+                vq.setLabAssistant(ua);
+            }
+        }
         vq.setStatus("Lab Assistant Assigned");
         populateTable();
     }//GEN-LAST:event_btnAssginLabActionPerformed

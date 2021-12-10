@@ -179,8 +179,7 @@ public class UserInsuranceRequestJPanel extends javax.swing.JPanel {
             Object[] row = new Object[4];
             row[0] = req.getUser().getEmployee().getName();
             row[1] = req.getStatus();
-            row[2] = req.getInsuranceAgent().getEmployee().getName();
-            row[3] = req.getInsuranceComment();
+            row[2] = req.getInsuranceComment();
             model.addRow(row);
         }
     }
