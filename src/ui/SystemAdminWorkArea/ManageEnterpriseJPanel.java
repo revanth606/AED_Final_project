@@ -84,6 +84,8 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         submitJButton = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(241, 235, 218));
+
         enterpriseJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -197,10 +199,10 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
             return;
         }
         String name = nameJTextField.getText();
-
         Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
 
         populateTable();
+        nameJTextField.setText("");
 
     }//GEN-LAST:event_submitJButtonActionPerformed
 

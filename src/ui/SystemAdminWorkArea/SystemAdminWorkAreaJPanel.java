@@ -65,7 +65,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 
                 organizationList=enterprise.getOrganizationDirectory().getOrganizationList();
                 for(int k=0;k<organizationList.size();k++){
-                    organization=organizationList.get(i);
+                    organization=organizationList.get(k);
                     organizationNode=new DefaultMutableTreeNode(organization.getName());
                     enterpriseNode.insert(organizationNode, k);
                 }
@@ -115,6 +115,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jSplitPane.setLeftComponent(jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(241, 235, 218));
+
         jLabel1.setText("Selected Node:");
 
         lblSelectedNode.setText("<View_selected_node>");
@@ -155,9 +157,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(91, 91, 91)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnManageAdmin)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnManageEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnManageNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(btnManageEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnManageNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(239, Short.MAX_VALUE))
         );
 

@@ -4,12 +4,21 @@
  */
 package ui.SystemAdminWorkArea;
 
+import Business.Analytics.Analytics;
 import Business.EcoSystem;
 import Business.Network.Network;
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -59,6 +68,10 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
         txtNetworkName = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
+        btnemployeeanalysis = new javax.swing.JButton();
+        bargraphJpanel = new javax.swing.JPanel();
+
+        setBackground(new java.awt.Color(241, 235, 218));
 
         networkJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,24 +120,50 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnemployeeanalysis.setText("Employee Analysis");
+        btnemployeeanalysis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnemployeeanalysisActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout bargraphJpanelLayout = new javax.swing.GroupLayout(bargraphJpanel);
+        bargraphJpanel.setLayout(bargraphJpanelLayout);
+        bargraphJpanelLayout.setHorizontalGroup(
+            bargraphJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 497, Short.MAX_VALUE)
+        );
+        bargraphJpanelLayout.setVerticalGroup(
+            bargraphJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 182, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBack)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(28, 28, 28)
-                            .addComponent(lblName)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtNetworkName, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSubmit))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(232, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(lblName)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNetworkName, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(btnSubmit)
+                                .addGap(35, 35, 35))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnBack)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)))
+                        .addComponent(btnemployeeanalysis))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(bargraphJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,13 +171,17 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btnBack)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnemployeeanalysis))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit)
                     .addComponent(txtNetworkName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblName))
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(bargraphJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -150,6 +193,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         network.setName(name);
 
         populateNetworkTable();
+        txtNetworkName.setText("");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -162,12 +206,54 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnemployeeanalysisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnemployeeanalysisActionPerformed
+        int selectedRowIndex = networkJTable.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Request not selected");
+            return;
+        }
+        String network = networkJTable.getValueAt(selectedRowIndex, 0).toString();
+        Analytics analytics = new Analytics(system);
+        HashMap<String,HashMap<String,Integer>> userMap = analytics.getNetworkUsers(network);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(String ent:userMap.keySet()){
+            for(String org:userMap.get(ent).keySet()){
+                dataset.addValue(userMap.get(ent).get(org),org,ent);
+                String top=network;
+                plotBarGraph(bargraphJpanel,dataset,top,"Enterprises","Employee Count");
+            }
+        }
+
+    }//GEN-LAST:event_btnemployeeanalysisActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bargraphJpanel;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnemployeeanalysis;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblName;
     private javax.swing.JTable networkJTable;
     private javax.swing.JTextField txtNetworkName;
     // End of variables declaration//GEN-END:variables
+private void plotBarGraph(JPanel graphJPanel, DefaultCategoryDataset dataset,String tHeader,String bHeader,String lHeader) {
+   
+        JFreeChart chart = ChartFactory.createBarChart3D(
+        tHeader, // Title
+        bHeader, // x-axis Label
+        lHeader, // y-axis Label
+        dataset, // Dataset
+        PlotOrientation.VERTICAL, // Plot Orientation
+        true, // Show Legend
+        true, // Use tooltips
+        false // Configure chart to generate URLs?
+     );
+        graphJPanel.removeAll();
+        graphJPanel.setLayout(new java.awt.BorderLayout());
+        ChartPanel CP = new ChartPanel(chart);
+        graphJPanel.add(CP,BorderLayout.CENTER);
+        graphJPanel.validate();
+    }
+
+
 }
