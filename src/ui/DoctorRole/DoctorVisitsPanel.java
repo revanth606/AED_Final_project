@@ -55,8 +55,10 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
         ArrayList<VisitRequest> vq = system.getVisitQueue().getVisitQueue();
         String doc = userAccount.getUsername();
         currvq = new ArrayList<>();
+        System.out.println(vq);
         for (VisitRequest req : vq) {
-            if (req.getDocUserName().equals(doc)) {
+            System.out.println(req.getDocUserName());
+            if ((req.getDocUserName()!=null) && (req.getDocUserName().equals(doc))) {
                 Object[] row = new Object[5];
                 row[0] = req.getUserName();
                 row[1] = req.getStatus();
@@ -90,6 +92,11 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
         lblResults = new javax.swing.JLabel();
         lblProblem = new javax.swing.JLabel();
         btnViewPrescription = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
 
         tblVisitRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,99 +132,79 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
             tblVisitRequests.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        add(jScrollPane1);
+        jScrollPane1.setBounds(99, 134, 456, 97);
+
+        btnReqTest.setBackground(new java.awt.Color(0, 153, 255));
         btnReqTest.setText("Request Test");
         btnReqTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReqTestActionPerformed(evt);
             }
         });
+        add(btnReqTest);
+        btnReqTest.setBounds(238, 75, 125, 29);
 
+        refreshTestJButton.setBackground(new java.awt.Color(0, 153, 255));
         refreshTestJButton.setText("Refresh");
         refreshTestJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshTestJButtonActionPerformed(evt);
             }
         });
+        add(refreshTestJButton);
+        refreshTestJButton.setBounds(545, 28, 91, 29);
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("EnterPrise :");
+        add(enterpriseLabel);
+        enterpriseLabel.setBounds(21, 27, 127, 30);
 
         valueLabel.setText("<value>");
+        add(valueLabel);
+        valueLabel.setBounds(178, 27, 158, 26);
 
         txtProblem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtProblemActionPerformed(evt);
             }
         });
+        add(txtProblem);
+        txtProblem.setBounds(188, 291, 120, 26);
+        add(jTextField2);
+        jTextField2.setBounds(449, 291, 106, 26);
 
         lblResults.setText("LabResults :");
+        add(lblResults);
+        lblResults.setBounds(345, 296, 76, 16);
 
         lblProblem.setText("Comment");
+        add(lblProblem);
+        lblProblem.setBounds(99, 296, 61, 16);
 
+        btnViewPrescription.setBackground(new java.awt.Color(0, 153, 255));
         btnViewPrescription.setText("View Prescription");
         btnViewPrescription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewPrescriptionActionPerformed(evt);
             }
         });
+        add(btnViewPrescription);
+        btnViewPrescription.setBounds(403, 75, 152, 29);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(173, 173, 173)
-                        .addComponent(refreshTestJButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblProblem)
-                                .addGap(28, 28, 28)
-                                .addComponent(txtProblem, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(lblResults)
-                                .addGap(28, 28, 28)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(btnReqTest)
-                        .addGap(128, 128, 128)
-                        .addComponent(btnViewPrescription)))
-                .addContainerGap(103, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(refreshTestJButton)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReqTest)
-                    .addComponent(btnViewPrescription))
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtProblem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblProblem))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblResults)))
-                .addContainerGap(114, Short.MAX_VALUE))
-        );
+        btnBack.setBackground(new java.awt.Color(153, 153, 0));
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        add(btnBack);
+        btnBack.setBounds(99, 75, 97, 29);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/saline.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1800, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReqTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReqTestActionPerformed
@@ -248,10 +235,18 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnViewPrescriptionActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReqTest;
     private javax.swing.JButton btnViewPrescription;
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblProblem;

@@ -55,46 +55,42 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
         btnVisitDoctor = new javax.swing.JButton();
         btnGetInsurance = new javax.swing.JButton();
         btnRefill = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
+
+        btnVisitDoctor.setBackground(new java.awt.Color(0, 153, 153));
         btnVisitDoctor.setText("Doctor Visits");
         btnVisitDoctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVisitDoctorActionPerformed(evt);
             }
         });
+        add(btnVisitDoctor);
+        btnVisitDoctor.setBounds(175, 59, 126, 29);
 
+        btnGetInsurance.setBackground(new java.awt.Color(0, 153, 153));
         btnGetInsurance.setText("Insurance");
         btnGetInsurance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGetInsuranceActionPerformed(evt);
             }
         });
+        add(btnGetInsurance);
+        btnGetInsurance.setBounds(175, 124, 126, 29);
 
+        btnRefill.setBackground(new java.awt.Color(0, 153, 153));
         btnRefill.setText("Get Refills");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnRefill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGetInsurance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVisitDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(199, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(btnVisitDoctor)
-                .addGap(36, 36, 36)
-                .addComponent(btnGetInsurance)
-                .addGap(36, 36, 36)
-                .addComponent(btnRefill)
-                .addContainerGap(182, Short.MAX_VALUE))
-        );
+        btnRefill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefillActionPerformed(evt);
+            }
+        });
+        add(btnRefill);
+        btnRefill.setBounds(175, 189, 126, 29);
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVisitDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisitDoctorActionPerformed
@@ -111,10 +107,18 @@ public class UserWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnGetInsuranceActionPerformed
 
+    private void btnRefillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefillActionPerformed
+        UserRefillRequestJPanel insreq = new UserRefillRequestJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+        userProcessContainer.add("insurance", insreq);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnRefillActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGetInsurance;
     private javax.swing.JButton btnRefill;
     private javax.swing.JButton btnVisitDoctor;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

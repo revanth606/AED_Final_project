@@ -55,41 +55,34 @@ public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
 
         btnVisitRequest = new javax.swing.JButton();
         btnRefillRequest = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
+
+        btnVisitRequest.setBackground(new java.awt.Color(0, 153, 153));
         btnVisitRequest.setText("Visits Request");
         btnVisitRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVisitRequestActionPerformed(evt);
             }
         });
+        add(btnVisitRequest);
+        btnVisitRequest.setBounds(227, 104, 133, 29);
 
+        btnRefillRequest.setBackground(new java.awt.Color(0, 153, 153));
         btnRefillRequest.setText("Refill Request");
         btnRefillRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefillRequestActionPerformed(evt);
             }
         });
+        add(btnRefillRequest);
+        btnRefillRequest.setBounds(227, 166, 130, 29);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(227, 227, 227)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRefillRequest)
-                    .addComponent(btnVisitRequest))
-                .addContainerGap(240, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(btnVisitRequest)
-                .addGap(33, 33, 33)
-                .addComponent(btnRefillRequest)
-                .addContainerGap(305, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/tabs2.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVisitRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisitRequestActionPerformed
@@ -112,5 +105,6 @@ public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefillRequest;
     private javax.swing.JButton btnVisitRequest;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,6 +12,7 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.InsuranceRequest;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -61,42 +62,59 @@ public class UserInsuranceRequestJPanel extends javax.swing.JPanel {
         btnBookVisit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
 
         lblHospital.setText("Insurance  Name :");
+        add(lblHospital);
+        lblHospital.setBounds(107, 128, 113, 16);
 
         jcbInsurance.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jcbInsurance);
+        jcbInsurance.setBounds(272, 124, 120, 27);
 
         CommentJLabel.setText("Comment :");
+        add(CommentJLabel);
+        CommentJLabel.setBounds(107, 178, 69, 16);
 
         CommentTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CommentTxtActionPerformed(evt);
             }
         });
+        add(CommentTxt);
+        CommentTxt.setBounds(272, 173, 120, 26);
 
+        btnBookVisit.setBackground(new java.awt.Color(0, 153, 255));
         btnBookVisit.setText("Book Visit");
         btnBookVisit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBookVisitActionPerformed(evt);
             }
         });
+        add(btnBookVisit);
+        btnBookVisit.setBounds(272, 237, 115, 29);
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "RequestId", "Status", "Comment", "Prescription"
+                "RequestId", "Status", "Comment"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -109,47 +127,28 @@ public class UserInsuranceRequestJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(workRequestJTable);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblHospital)
-                    .addComponent(CommentJLabel))
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbInsurance, 0, 120, Short.MAX_VALUE)
-                            .addComponent(CommentTxt))
-                        .addGap(108, 108, 108))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBookVisit, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHospital)
-                    .addComponent(jcbInsurance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CommentJLabel)
-                    .addComponent(CommentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnBookVisit)
-                .addContainerGap(154, Short.MAX_VALUE))
-        );
+        add(jScrollPane1);
+        jScrollPane1.setBounds(75, 15, 346, 97);
+
+        btnBack.setBackground(new java.awt.Color(153, 153, 0));
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        add(btnBack);
+        btnBack.setBounds(79, 237, 97, 29);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/insurance.gif"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(380, 0, 1900, 900);
+
+        jLabel2.setFont(new java.awt.Font("Zapfino", 2, 14)); // NOI18N
+        jLabel2.setText("live care free, whoever you are");
+        jLabel2.setToolTipText("");
+        add(jLabel2);
+        jLabel2.setBounds(90, 420, 280, 160);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBookVisitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookVisitActionPerformed
@@ -170,14 +169,20 @@ public class UserInsuranceRequestJPanel extends javax.swing.JPanel {
     private void CommentTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommentTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CommentTxtActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
     
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
         ArrayList<InsuranceRequest> iq = system.getInsuranceQueue().getInsuranceQueue();
         for (InsuranceRequest req : iq) {
-            Object[] row = new Object[4];
-            row[0] = req.getUser().getEmployee().getName();
+            Object[] row = new Object[3];
+            row[0] = req.getRequestId();
             row[1] = req.getStatus();
             row[2] = req.getInsuranceComment();
             model.addRow(row);
@@ -199,7 +204,10 @@ public class UserInsuranceRequestJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CommentJLabel;
     private javax.swing.JTextField CommentTxt;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBookVisit;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jcbInsurance;
     private javax.swing.JLabel lblHospital;

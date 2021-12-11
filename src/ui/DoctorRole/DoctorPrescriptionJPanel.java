@@ -119,17 +119,28 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
         tblPrescription = new javax.swing.JTable();
         btnPrescribe = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
 
         lblPharmacy.setText("Pharmacy :");
+        add(lblPharmacy);
+        lblPharmacy.setBounds(96, 35, 68, 16);
 
         jcbPharmacy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jcbPharmacy);
+        jcbPharmacy.setBounds(236, 31, 130, 27);
 
+        btnAssginPharmacy.setBackground(new java.awt.Color(0, 153, 255));
         btnAssginPharmacy.setText("Select");
         btnAssginPharmacy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssginPharmacyActionPerformed(evt);
             }
         });
+        add(btnAssginPharmacy);
+        btnAssginPharmacy.setBounds(502, 30, 81, 29);
 
         tblDrugs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,12 +170,18 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblDrugs);
 
+        add(jScrollPane1);
+        jScrollPane1.setBounds(6, 71, 577, 97);
+
+        btnAdd.setBackground(new java.awt.Color(0, 153, 255));
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
+        add(btnAdd);
+        btnAdd.setBounds(508, 180, 75, 29);
 
         tblPrescription.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -194,73 +211,32 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblPrescription);
 
+        add(jScrollPane2);
+        jScrollPane2.setBounds(6, 243, 588, 97);
+
+        btnPrescribe.setBackground(new java.awt.Color(0, 153, 255));
         btnPrescribe.setText("Prescribe");
         btnPrescribe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrescribeActionPerformed(evt);
             }
         });
+        add(btnPrescribe);
+        btnPrescribe.setBounds(493, 381, 101, 29);
 
+        btnBack.setBackground(new java.awt.Color(153, 153, 0));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
+        add(btnBack);
+        btnBack.setBounds(63, 381, 97, 29);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(17, 17, 17))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(lblPharmacy)
-                        .addGap(72, 72, 72)
-                        .addComponent(jcbPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnAssginPharmacy))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(btnBack)
-                        .addGap(208, 208, 208)
-                        .addComponent(btnPrescribe)))
-                .addContainerGap(112, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnAdd)
-                .addGap(135, 135, 135))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAssginPharmacy)
-                    .addComponent(lblPharmacy)
-                    .addComponent(jcbPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAdd)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPrescribe)
-                    .addComponent(btnBack))
-                .addContainerGap(90, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/tabs1.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1800, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAssginPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssginPharmacyActionPerformed
@@ -304,6 +280,7 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAssginPharmacy;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnPrescribe;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox jcbPharmacy;

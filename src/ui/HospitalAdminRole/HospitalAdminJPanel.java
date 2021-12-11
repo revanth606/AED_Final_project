@@ -11,6 +11,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import ui.AdministrativeRole.ManageVisitsJPanel;
 
 /**
  *
@@ -49,45 +50,41 @@ public class HospitalAdminJPanel extends javax.swing.JPanel {
 
         btnManageWorkRequests = new javax.swing.JButton();
         btnInsurance = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
+
+        btnManageWorkRequests.setBackground(new java.awt.Color(0, 153, 153));
         btnManageWorkRequests.setText("Manage Visit Requests");
         btnManageWorkRequests.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageWorkRequestsActionPerformed(evt);
             }
         });
+        add(btnManageWorkRequests);
+        btnManageWorkRequests.setBounds(150, 142, 187, 29);
 
+        btnInsurance.setBackground(new java.awt.Color(0, 153, 153));
         btnInsurance.setText("Manage Health Checks");
         btnInsurance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsuranceActionPerformed(evt);
             }
         });
+        add(btnInsurance);
+        btnInsurance.setBounds(150, 203, 187, 29);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnManageWorkRequests, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnInsurance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(263, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addComponent(btnManageWorkRequests)
-                .addGap(32, 32, 32)
-                .addComponent(btnInsurance)
-                .addContainerGap(268, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/docgloves.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageWorkRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageWorkRequestsActionPerformed
-        // TODO add your handling code here:
+        ManageVisitsJPanel mr = new ManageVisitsJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+        userProcessContainer.add("manageVisitsJPanel", mr);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageWorkRequestsActionPerformed
 
     private void btnInsuranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsuranceActionPerformed
@@ -101,5 +98,6 @@ public class HospitalAdminJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInsurance;
     private javax.swing.JButton btnManageWorkRequests;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

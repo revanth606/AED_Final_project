@@ -56,12 +56,9 @@ public class SalesPersonRefillRequestJPanel extends javax.swing.JPanel {
         currrq = new ArrayList<>();
         for (RefillRequest req : rq) {
             if (req.getSalesPersonComment()!=null && req.getSalesPersonComment().equals(currsalesperson)) {
-                Object[] row = new Object[5];
-                row[0] = req.getUser().getEmployee().getName();
+                Object[] row = new Object[2];
+                row[0] = req.getRequestId();
                 row[1] = req.getStatus();
-                row[2] = req.getSalesPerson().getEmployee().getName();
-                row[3] = req.getSalesPersonComment();
-                row[4] = req.getDeliveryComment();
                 model.addRow(row);
                 currrq.add(req);
             }
@@ -103,23 +100,27 @@ public class SalesPersonRefillRequestJPanel extends javax.swing.JPanel {
         lblDelivery = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnReject = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
 
         tblVisits.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "RequestId", "Status", "Doc", "Lab", "Salesguy"
+                "RequestId", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -132,92 +133,68 @@ public class SalesPersonRefillRequestJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblVisits);
 
+        add(jScrollPane1);
+        jScrollPane1.setBounds(72, 104, 432, 97);
+
         lblInsurance.setText("Insurance :");
+        add(lblInsurance);
+        lblInsurance.setBounds(106, 257, 69, 16);
 
         jcbInsurance.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jcbInsurance);
+        jcbInsurance.setBounds(227, 253, 130, 27);
 
+        btnAssginInsurance.setBackground(new java.awt.Color(0, 153, 255));
         btnAssginInsurance.setText("Assign");
         btnAssginInsurance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssginInsuranceActionPerformed(evt);
             }
         });
+        add(btnAssginInsurance);
+        btnAssginInsurance.setBounds(398, 252, 87, 29);
 
+        btnAssginDelivery.setBackground(new java.awt.Color(0, 153, 255));
         btnAssginDelivery.setText("Assign");
         btnAssginDelivery.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssginDeliveryActionPerformed(evt);
             }
         });
+        add(btnAssginDelivery);
+        btnAssginDelivery.setBounds(398, 313, 87, 29);
 
         jcbDelivery.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jcbDelivery);
+        jcbDelivery.setBounds(227, 314, 130, 27);
 
         lblDelivery.setText("Delivery :");
+        add(lblDelivery);
+        lblDelivery.setBounds(106, 318, 59, 16);
 
+        btnBack.setBackground(new java.awt.Color(153, 153, 0));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
+        add(btnBack);
+        btnBack.setBounds(66, 27, 97, 29);
 
+        btnReject.setBackground(new java.awt.Color(255, 102, 102));
         btnReject.setText("Reject");
         btnReject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRejectActionPerformed(evt);
             }
         });
+        add(btnReject);
+        btnReject.setBounds(422, 27, 82, 29);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblInsurance)
-                            .addComponent(lblDelivery))
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jcbInsurance, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAssginInsurance)
-                                    .addComponent(btnAssginDelivery)))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnBack)
-                            .addGap(259, 259, 259)
-                            .addComponent(btnReject))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(96, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnReject))
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblInsurance)
-                    .addComponent(jcbInsurance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAssginInsurance))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDelivery)
-                    .addComponent(jcbDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAssginDelivery))
-                .addContainerGap(148, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/tabs2.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAssginInsuranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssginInsuranceActionPerformed
@@ -277,6 +254,7 @@ public class SalesPersonRefillRequestJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAssginInsurance;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReject;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jcbDelivery;
     private javax.swing.JComboBox jcbInsurance;
