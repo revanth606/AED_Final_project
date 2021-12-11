@@ -4,12 +4,14 @@
  */
 package Business.WorkQueue;
 
+import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
- * @author raunak
+ * @author Jashwanth
  */
 public abstract class WorkRequest {
 
@@ -20,7 +22,15 @@ public abstract class WorkRequest {
     private Date requestDate;
     private Date resolveDate;
     private String requestId;
-
+    private Network sourceNetwork;
+    private Network receivedNetwork;
+    
+    public WorkRequest() {
+        String reqid = UUID.randomUUID().toString();
+        requestId = reqid;
+        requestDate = new Date();
+    }
+    
     public String getRequestId() {
         return requestId;
     }
@@ -29,10 +39,6 @@ public abstract class WorkRequest {
         this.requestId = requestId;
     }
     
-    public WorkRequest(){
-        requestDate = new Date();
-    }
-
     public String getMessage() {
         return message;
     }
