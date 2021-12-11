@@ -7,6 +7,7 @@ package ui.UserRole;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Enterprise.EnterpriseType;
+import Business.Medication.Drug;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -32,6 +33,11 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
     private EcoSystem system;
     private ArrayList<Enterprise> pharmacies = new ArrayList<>();
     private ArrayList<VisitRequest> reqlist = new ArrayList<>();
+    private VisitRequest vr;
+    private RefillRequest rr;
+    private ArrayList<RefillRequest> rq = new ArrayList<>();
+    private RefillRequest crr;
+    
     /**
      * Creates new form UserVisitDoctorJPanel
      */
@@ -47,6 +53,8 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
         populateComboBox();
         populateTable();
         populateRefillTable();
+        btnSave.setEnabled(false);
+        
     }
 
     /**
@@ -68,14 +76,20 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         workRequestJTable1 = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnView = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnPrescription = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblPrescription = new javax.swing.JTable();
+        lblImage = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(241, 235, 218));
         setLayout(null);
 
-        lblHospital.setText("Insurance  Name :");
+        lblHospital.setText("Pharmacy :");
         add(lblHospital);
-        lblHospital.setBounds(107, 128, 113, 16);
+        lblHospital.setBounds(500, 70, 68, 16);
 
         jcbInsurance.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbInsurance.addActionListener(new java.awt.event.ActionListener() {
@@ -84,11 +98,11 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
             }
         });
         add(jcbInsurance);
-        jcbInsurance.setBounds(272, 124, 150, 27);
+        jcbInsurance.setBounds(650, 70, 150, 27);
 
         CommentJLabel.setText("Comment :");
         add(CommentJLabel);
-        CommentJLabel.setBounds(107, 178, 69, 16);
+        CommentJLabel.setBounds(500, 110, 69, 16);
 
         CommentTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +110,7 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
             }
         });
         add(CommentTxt);
-        CommentTxt.setBounds(272, 173, 150, 26);
+        CommentTxt.setBounds(650, 110, 170, 26);
 
         btnBookVisit.setBackground(new java.awt.Color(0, 153, 255));
         btnBookVisit.setText("Order Refilll");
@@ -106,7 +120,7 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
             }
         });
         add(btnBookVisit);
-        btnBookVisit.setBounds(272, 229, 115, 29);
+        btnBookVisit.setBounds(710, 190, 115, 29);
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,7 +151,7 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(workRequestJTable);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(89, 15, 346, 97);
+        jScrollPane1.setBounds(56, 60, 410, 100);
 
         workRequestJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -168,7 +182,7 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(workRequestJTable1);
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(97, 276, 371, 97);
+        jScrollPane2.setBounds(490, 240, 371, 100);
 
         btnBack.setBackground(new java.awt.Color(153, 153, 0));
         btnBack.setText("<< Back");
@@ -178,11 +192,81 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
             }
         });
         add(btnBack);
-        btnBack.setBounds(107, 229, 97, 29);
+        btnBack.setBounds(100, 20, 97, 29);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/tabs2.jpg"))); // NOI18N
-        add(jLabel1);
-        jLabel1.setBounds(0, 0, 1900, 900);
+        btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
+        add(btnView);
+        btnView.setBounds(540, 150, 97, 29);
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        add(btnSave);
+        btnSave.setBounds(710, 150, 100, 29);
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        add(btnDelete);
+        btnDelete.setBounds(540, 190, 100, 29);
+
+        btnPrescription.setText("View Prescription");
+        btnPrescription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrescriptionActionPerformed(evt);
+            }
+        });
+        add(btnPrescription);
+        btnPrescription.setBounds(290, 190, 150, 29);
+
+        tblPrescription.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Drug", "Cost", "Quantity"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblPrescription);
+        if (tblPrescription.getColumnModel().getColumnCount() > 0) {
+            tblPrescription.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        add(jScrollPane3);
+        jScrollPane3.setBounds(56, 243, 410, 97);
+
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/tabs2.jpg"))); // NOI18N
+        add(lblImage);
+        lblImage.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBookVisitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookVisitActionPerformed
@@ -200,6 +284,8 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
         rr.setPrescription(vr.getPrescription());
         system.getRefillQueue().getRefillQueue().add(rr);
         rr.setUser(userAccount);
+        rr.setStatus("Refill requested");
+        crr = rr;
         for (Enterprise phs : pharmacies) {
             if (phs.getName().equals(jcbInsurance.getSelectedItem().toString())) {
                 rr.setPharmacy(phs);
@@ -222,6 +308,46 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrescriptionActionPerformed
+        populatePrescriptionTable();
+    }//GEN-LAST:event_btnPrescriptionActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRow = workRequestJTable1.getSelectedRow();
+        RefillRequest rr = rq.get(selectedRow);
+        if (selectedRow < 0){
+            JOptionPane.showMessageDialog(this, "Refill not selected");
+            return;
+        }
+        if (vr.getStatus().equals("Refill requested")) {
+            rq.remove(selectedRow);
+            JOptionPane.showMessageDialog(this, "Request removed");
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid request");
+        }
+        populateRefillTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        int selectedRow = workRequestJTable1.getSelectedRow();
+        if (selectedRow < 0){
+            JOptionPane.showMessageDialog(this, "Refill not selected");
+            return;
+        }
+        RefillRequest rr = rq.get(selectedRow);
+        crr = rr;
+        CommentTxt.setText(rr.getUserComment());
+        btnSave.setEnabled(true);
+        jcbInsurance.setEnabled(false);
+        populatePrescriptionTable1();
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        btnSave.setEnabled(false);
+        jcbInsurance.setEnabled(true);
+        crr.setUserComment(CommentTxt.getText());
+    }//GEN-LAST:event_btnSaveActionPerformed
     
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
@@ -233,8 +359,8 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
             row[1] = req.getStatus();
             row[2] = req.getProblemComment();
             model.addRow(row);
-            reqlist.add(req);
         }
+        reqlist = vq;
     }
     
     private void populateRefillTable() {
@@ -245,6 +371,48 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
             Object[] row = new Object[2];
             row[0] = req.getRequestId();
             row[1] = req.getStatus();
+            model.addRow(row);
+        }
+    }
+
+    private void populatePrescriptionTable() {
+        DefaultTableModel model = (DefaultTableModel) tblPrescription.getModel();
+        model.setRowCount(0);
+        int selectedRow = workRequestJTable.getSelectedRow();
+        VisitRequest vr = reqlist.get(selectedRow);
+        if (vr.getPrescription() == null) {
+            JOptionPane.showMessageDialog(this, "Prescription not present");
+            return;
+        }
+        ArrayList<Drug> drugs = vr.getPrescription().getList();
+        for (Drug d : drugs) {
+            Object[] row = new Object[3];
+            row[0] = d.getDrugName();
+            row[1] = d.getQuantity();
+            row[2] = d.getCost();
+            model.addRow(row);
+        }
+    }
+    
+    private void populatePrescriptionTable1() {
+        DefaultTableModel model = (DefaultTableModel) tblPrescription.getModel();
+        model.setRowCount(0);
+        int selectedRow = workRequestJTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Refill not selected");
+            return;
+        }
+        ArrayList<RefillRequest> rq = system.getRefillQueue().getRefillQueue();
+        rr = rq.get(selectedRow);
+        if (rr.getPrescription() == null) {
+            JOptionPane.showMessageDialog(this, "Prescription not present");
+            return;
+        }ArrayList<Drug> drugs = vr.getPrescription().getList();
+        for (Drug d : drugs) {
+            Object[] row = new Object[3];
+            row[0] = d.getDrugName();
+            row[1] = d.getQuantity();
+            row[2] = d.getCost();
             model.addRow(row);
         }
     }
@@ -266,11 +434,17 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField CommentTxt;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBookVisit;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnPrescription;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnView;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JComboBox jcbInsurance;
     private javax.swing.JLabel lblHospital;
+    private javax.swing.JLabel lblImage;
+    private javax.swing.JTable tblPrescription;
     private javax.swing.JTable workRequestJTable;
     private javax.swing.JTable workRequestJTable1;
     // End of variables declaration//GEN-END:variables

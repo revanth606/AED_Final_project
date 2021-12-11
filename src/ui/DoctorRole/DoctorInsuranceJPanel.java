@@ -57,7 +57,7 @@ public class DoctorInsuranceJPanel extends javax.swing.JPanel {
         String doc = userAccount.getUsername();
         curriq = new ArrayList<>();
         for (InsuranceRequest req : iq) {
-            if (req.getDoctor().getUsername().equals(doc)) {
+            if (req.getDoctor()!=null && req.getDoctor().getUsername().equals(doc)) {
                 Object[] row = new Object[5];
                 row[0] = req.getRequestId();
                 row[1] = req.getStatus();

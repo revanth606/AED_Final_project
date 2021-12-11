@@ -52,7 +52,7 @@ public class HospitalAdminInsuranceJPanel extends javax.swing.JPanel {
         ArrayList<InsuranceRequest> iq = system.getInsuranceQueue().getInsuranceQueue();
         currvq = new ArrayList<>();
         for (InsuranceRequest req : iq) {
-            if (req.getHospital().getName().equals(enterprise.getName())) {
+            if (req.getHospital()!=null && req.getHospital().getName().equals(enterprise.getName())) {
                 Object[] row = new Object[2];
                 row[0] = req.getRequestId();
                 row[1] = req.getStatus();
