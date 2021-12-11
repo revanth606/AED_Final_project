@@ -48,6 +48,7 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         this.system = system;
         populateDocComboBox();
         populateLabComboBox();
+        populatePharmacyComboBox();
         populateTable();
     }
     
@@ -59,9 +60,6 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         currvq = new ArrayList<>();
         for (VisitRequest req : vq) {
             if (req.getHospitalname().equals(currhospital)) {
-                if (req.getDocUserName()=="") {
-                    req.setStatus("Doctor not assigned");
-                }
                 Object[] row = new Object[6];
                 row[0] = req.getUserName();
                 row[1] = req.getProblemComment();
@@ -99,13 +97,13 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         }
     }
     
-//    private void populatePharmacyComboBox() {
-//        jcbPharmacy.removeAllItems();
-//        ArrayList<Enterprise> enterprises = network.getEnterpriseList(EnterpriseType.Pharmacy);
-//        for (Enterprise ent: enterprises) {
-//            jcbPharmacy.addItem(ent.getName());
-//        }
-//    }
+    private void populatePharmacyComboBox() {
+        jcbPharmacy.removeAllItems();
+        ArrayList<Enterprise> enterprises = network.getEnterpriseList(EnterpriseType.Pharmacy);
+        for (Enterprise ent: enterprises) {
+            jcbPharmacy.addItem(ent.getName());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,7 +139,7 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Compliant", "Doc", "Lab", "Salesguy", "Status"
+                "Name", "Compliant", "Doctor", "LabAssistant", "Pharmacy", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -261,9 +259,13 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
             return;
         }
         VisitRequest vq = currvq.get(selectedRowIndex);
-        vq.setDocUserName(jcbDoctors.getSelectedItem().toString());
-        vq.setStatus("Waiting for Doctor");
-        populateTable();
+        if (vq.getStatus().equals("Visit requested") || vq.getStatus().equals("Doctor assigned")) {
+            vq.setDocUserName(jcbDoctors.getSelectedItem().toString());
+            vq.setStatus("Doctor assigned");
+            populateTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid request");
+        }
     }//GEN-LAST:event_btnAssginDocActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -279,9 +281,14 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
             return;
         }
         VisitRequest vq = currvq.get(selectedRowIndex);
-        vq.setLabUserName(jcbLabAssistants.getSelectedItem().toString());
-        vq.setStatus("Waiting for Lab Results");
-        populateTable();
+        if (vq.getStatus().equals("Tests requested") || vq.getStatus().equals("Lab Assistant assigned")) {
+            vq.setLabUserName(jcbLabAssistants.getSelectedItem().toString());
+            vq.setStatus("Lab Assistant assigned");
+            JOptionPane.showMessageDialog(this, "Lab Assistant assigned");
+            populateTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid request");
+        }
     }//GEN-LAST:event_btnAssginLabActionPerformed
 
     private void btnAssginPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssginPharmacyActionPerformed
@@ -291,9 +298,14 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
             return;
         }
         VisitRequest vq = currvq.get(selectedRowIndex);
-        vq.setSalesPersonName(jcbPharmacy.getSelectedItem().toString());
-        vq.setStatus("Sent to Pharmacy");
-        populateTable();
+        if (vq.getStatus().equals("Doctor prescribed") || vq.getStatus().equals("Pharmacy requested")) {
+            vq.setSalesPersonName(jcbPharmacy.getSelectedItem().toString());
+            vq.setStatus("Pharmacy requested");
+            JOptionPane.showMessageDialog(this, "Pharmacy requested");
+            populateTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid request");
+        }
     }//GEN-LAST:event_btnAssginPharmacyActionPerformed
 
 
