@@ -144,20 +144,20 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
 
         tblDrugs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Drug", "Receiver", "Status", "Result"
+                "Drug", "Cost", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -185,20 +185,20 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
 
         tblPrescription.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Drug", "Receiver", "Status", "Result"
+                "Drug", "Cost", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -250,8 +250,10 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Drugs not selected");
             return;
         }
-        Object[] row = new Object[1];
+        Object[] row = new Object[3];
         row[0] = drugs.getDrugDirectory().get(selectedRowIndex).getDrugName();
+        row[1] = drugs.getDrugDirectory().get(selectedRowIndex).getCost();
+        row[2] = drugs.getDrugDirectory().get(selectedRowIndex).getQuantity();
         model.addRow(row);
         if (dlist==null) {
             dlist = new ArrayList<>();
@@ -264,8 +266,14 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
         for (Drug d : dlist) {
             pres.getList().add(d);
         }
-        vr.setPrescription(pres);
-        vr.setSalesPersonName(jcbPharmacy.getSelectedItem().toString());
+        if (vr.getStatus().equals("Tests available") || vr.getStatus().equals("Medicines prescribed")) {
+            vr.setPrescription(pres);
+            vr.setSalesPersonName(jcbPharmacy.getSelectedItem().toString());
+            vr.setStatus("Medicines prescribed");
+            JOptionPane.showMessageDialog(this, "Medicines prescibed");
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid request");
+        }
     }//GEN-LAST:event_btnPrescribeActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

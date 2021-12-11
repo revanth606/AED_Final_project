@@ -45,8 +45,9 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.network = network;
         this.system = system;
-        valueLabel.setText(enterprise.getName());
         populateRequestTable();
+        txtLabResult.setEnabled(false);
+        btnSave.setEnabled(false);
     }
     
     public void populateRequestTable(){
@@ -66,9 +67,9 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
                 row[3] = req.getLabUserName();
                 row[4] = req.getSalesPersonName();
                 model.addRow(row);
-                currvq.add(req);
             }
         }
+        currvq = vq;
     }
 
     
@@ -84,15 +85,15 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVisitRequests = new javax.swing.JTable();
         btnReqTest = new javax.swing.JButton();
-        refreshTestJButton = new javax.swing.JButton();
-        enterpriseLabel = new javax.swing.JLabel();
-        valueLabel = new javax.swing.JLabel();
-        txtProblem = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtDoctorComment = new javax.swing.JTextField();
+        txtLabResult = new javax.swing.JTextField();
         lblResults = new javax.swing.JLabel();
         lblProblem = new javax.swing.JLabel();
         btnViewPrescription = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        btnView = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(241, 235, 218));
@@ -106,7 +107,7 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Message", "Receiver", "Status", "Result"
+                "Problem", "Test results", "Doctor comment", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -133,7 +134,7 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
         }
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(99, 134, 456, 97);
+        jScrollPane1.setBounds(100, 90, 456, 97);
 
         btnReqTest.setBackground(new java.awt.Color(0, 153, 255));
         btnReqTest.setText("Request Test");
@@ -143,44 +144,27 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
             }
         });
         add(btnReqTest);
-        btnReqTest.setBounds(238, 75, 125, 29);
+        btnReqTest.setBounds(240, 220, 125, 29);
 
-        refreshTestJButton.setBackground(new java.awt.Color(0, 153, 255));
-        refreshTestJButton.setText("Refresh");
-        refreshTestJButton.addActionListener(new java.awt.event.ActionListener() {
+        txtDoctorComment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshTestJButtonActionPerformed(evt);
+                txtDoctorCommentActionPerformed(evt);
             }
         });
-        add(refreshTestJButton);
-        refreshTestJButton.setBounds(545, 28, 91, 29);
+        add(txtDoctorComment);
+        txtDoctorComment.setBounds(170, 270, 120, 26);
+        add(txtLabResult);
+        txtLabResult.setBounds(416, 270, 140, 26);
 
-        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("EnterPrise :");
-        add(enterpriseLabel);
-        enterpriseLabel.setBounds(21, 27, 127, 30);
-
-        valueLabel.setText("<value>");
-        add(valueLabel);
-        valueLabel.setBounds(178, 27, 158, 26);
-
-        txtProblem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtProblemActionPerformed(evt);
-            }
-        });
-        add(txtProblem);
-        txtProblem.setBounds(188, 291, 120, 26);
-        add(jTextField2);
-        jTextField2.setBounds(449, 291, 106, 26);
-
+        lblResults.setForeground(new java.awt.Color(238, 238, 238));
         lblResults.setText("LabResults :");
         add(lblResults);
-        lblResults.setBounds(345, 296, 76, 16);
+        lblResults.setBounds(330, 280, 76, 16);
 
-        lblProblem.setText("Comment");
+        lblProblem.setForeground(new java.awt.Color(238, 238, 238));
+        lblProblem.setText("Comment :");
         add(lblProblem);
-        lblProblem.setBounds(99, 296, 61, 16);
+        lblProblem.setBounds(90, 280, 70, 16);
 
         btnViewPrescription.setBackground(new java.awt.Color(0, 153, 255));
         btnViewPrescription.setText("View Prescription");
@@ -190,7 +174,7 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
             }
         });
         add(btnViewPrescription);
-        btnViewPrescription.setBounds(403, 75, 152, 29);
+        btnViewPrescription.setBounds(400, 220, 152, 29);
 
         btnBack.setBackground(new java.awt.Color(153, 153, 0));
         btnBack.setText("<< Back");
@@ -200,7 +184,31 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
             }
         });
         add(btnBack);
-        btnBack.setBounds(99, 75, 97, 29);
+        btnBack.setBounds(60, 30, 97, 29);
+
+        btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
+        add(btnView);
+        btnView.setBounds(100, 220, 75, 29);
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        add(btnSave);
+        btnSave.setBounds(450, 310, 75, 29);
+
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(238, 238, 238));
+        jLabel2.setText("Manage Visits");
+        add(jLabel2);
+        jLabel2.setBounds(220, 26, 230, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/saline.jpg"))); // NOI18N
         add(jLabel1);
@@ -208,20 +216,18 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReqTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReqTestActionPerformed
-        
-        
-        
+        int selectedRowIndex = tblVisitRequests.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Request not selected");
+            return;
+        }
+        VisitRequest visitrequest = currvq.get(selectedRowIndex);
+        visitrequest.setStatus("Lab requested");
     }//GEN-LAST:event_btnReqTestActionPerformed
 
-    private void refreshTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTestJButtonActionPerformed
-
-        populateRequestTable();
-        
-    }//GEN-LAST:event_refreshTestJButtonActionPerformed
-
-    private void txtProblemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProblemActionPerformed
+    private void txtDoctorCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDoctorCommentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtProblemActionPerformed
+    }//GEN-LAST:event_txtDoctorCommentActionPerformed
 
     private void btnViewPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewPrescriptionActionPerformed
         int selectedRowIndex = tblVisitRequests.getSelectedRow();
@@ -241,19 +247,42 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        int selectedRowIndex = tblVisitRequests.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Request not selected");
+            return;
+        }
+        VisitRequest visitrequest = currvq.get(selectedRowIndex);
+        txtDoctorComment.setText(visitrequest.getDocComment());
+        txtLabResult.setText(visitrequest.getLabComment());
+        btnSave.setEnabled(true);
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        int selectedRowIndex = tblVisitRequests.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Request not selected");
+            return;
+        }
+        VisitRequest visitrequest = currvq.get(selectedRowIndex);
+        visitrequest.setDocComment(txtDoctorComment.getText());
+        btnSave.setEnabled(false);
+    }//GEN-LAST:event_btnSaveActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReqTest;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnView;
     private javax.swing.JButton btnViewPrescription;
-    private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblProblem;
     private javax.swing.JLabel lblResults;
-    private javax.swing.JButton refreshTestJButton;
     private javax.swing.JTable tblVisitRequests;
-    private javax.swing.JTextField txtProblem;
-    private javax.swing.JLabel valueLabel;
+    private javax.swing.JTextField txtDoctorComment;
+    private javax.swing.JTextField txtLabResult;
     // End of variables declaration//GEN-END:variables
 }

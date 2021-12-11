@@ -271,6 +271,10 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
 
     private void btnBookVisitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookVisitActionPerformed
         int rowindex = workRequestJTable.getSelectedRow();
+        if (rowindex < 0) {
+            JOptionPane.showMessageDialog(this, "Visit not selected");
+            return;
+        }
         VisitRequest vr = reqlist.get(rowindex);
         if (jcbInsurance.getSelectedItem() != null) {
             String pharmacy = jcbInsurance.getSelectedItem().toString();
@@ -315,12 +319,13 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int selectedRow = workRequestJTable1.getSelectedRow();
+        rq = system.getRefillQueue().getRefillQueue();
         RefillRequest rr = rq.get(selectedRow);
         if (selectedRow < 0){
             JOptionPane.showMessageDialog(this, "Refill not selected");
             return;
         }
-        if (vr.getStatus().equals("Refill requested")) {
+        if (rr.getStatus().equals("Refill requested")) {
             rq.remove(selectedRow);
             JOptionPane.showMessageDialog(this, "Request removed");
         } else {
@@ -335,6 +340,7 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Refill not selected");
             return;
         }
+        rq = system.getRefillQueue().getRefillQueue();
         RefillRequest rr = rq.get(selectedRow);
         crr = rr;
         CommentTxt.setText(rr.getUserComment());
@@ -407,7 +413,8 @@ public class UserRefillRequestJPanel extends javax.swing.JPanel {
         if (rr.getPrescription() == null) {
             JOptionPane.showMessageDialog(this, "Prescription not present");
             return;
-        }ArrayList<Drug> drugs = vr.getPrescription().getList();
+        }
+        ArrayList<Drug> drugs = rr.getPrescription().getList();
         for (Drug d : drugs) {
             Object[] row = new Object[3];
             row[0] = d.getDrugName();
