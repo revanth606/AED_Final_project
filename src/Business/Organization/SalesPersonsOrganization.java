@@ -6,6 +6,7 @@ package Business.Organization;
 
 import Business.Role.DoctorRole;
 import Business.Role.Role;
+import Business.Role.SalesPersonRole;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +22,7 @@ public class SalesPersonsOrganization extends Organization{
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
-        roles.add(new DoctorRole());
+        roles.add(new SalesPersonRole());
         return roles;
     }
      

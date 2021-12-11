@@ -7,6 +7,7 @@ package Business.Enterprise;
 
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,7 +27,7 @@ public abstract class Enterprise extends Organization{
         Insurance("Insurance"),
         Pharmacy("Pharmacy"),
         Delivery("Delivery"),
-        Manufacturer("Delivery"),
+        Manufacturer("Manufacturer"),
         User("User");
         
         private String value;
@@ -39,8 +40,8 @@ public abstract class Enterprise extends Organization{
         }
         @Override
         public String toString(){
-        return value;
-    }
+            return value;
+        }
     }
 
     public EnterpriseType getEnterpriseType() {
@@ -55,5 +56,15 @@ public abstract class Enterprise extends Organization{
         super(name);
         this.enterpriseType=type;
         organizationDirectory=new OrganizationDirectory();
+    }
+    
+    public ArrayList<Organization>getOrganizationsbyType(String type){
+        ArrayList<Organization> orgList = new ArrayList<>();
+        for(Organization org : organizationDirectory.getOrganizationList()){
+            if(org.getName().equals(type)){
+                orgList.add(org);
+            }
+        }
+        return orgList;
     }
 }

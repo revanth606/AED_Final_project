@@ -46,7 +46,10 @@ public class EnterpriseDirectory {
         } else if (type==Enterprise.EnterpriseType.User){
             enterprise=new UserEnterprise(name);
             enterpriseList.add(enterprise);
-        } 
+        } else if (type==Enterprise.EnterpriseType.Manufacturer){
+            enterprise=new ManufacturerEnterprise(name);
+            enterpriseList.add(enterprise);
+        }
         return enterprise;
     }
     

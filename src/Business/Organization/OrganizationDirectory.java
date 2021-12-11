@@ -33,6 +33,22 @@ public class OrganizationDirectory {
             organization = new LabOrganization();
             organizationList.add(organization);
         }
+        else if (type.getValue().equals(Type.User.getValue())){
+            organization = new UserOrganization();
+            organizationList.add(organization);
+        } else if (type.getValue().equals(Type.SalesPerson.getValue())){
+            organization = new SalesPersonsOrganization();
+            organizationList.add(organization);
+        } else if (type.getValue().equals(Type.InsuranceAgent.getValue())){
+            organization = new InsuranceAgentOrganization();
+            organizationList.add(organization);
+        } else if (type.getValue().equals(Type.IntraCityDriver.getValue())){
+            organization = new IntraCityOrganization();
+            organizationList.add(organization);
+        } else if (type.getValue().equals(Type.InterCityDriver.getValue())){
+            organization = new InterCityOrganization();
+            organizationList.add(organization);
+        }
         return organization;
     }
 }
