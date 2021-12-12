@@ -56,14 +56,14 @@ public class ManufacturerAdminJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(241, 235, 218));
 
-        btnManageVisit.setText("Manage Visit Requests");
+        btnManageVisit.setText("Manage Orders");
         btnManageVisit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageVisitActionPerformed(evt);
             }
         });
 
-        btnManageInsurances.setText("Manage Insurances");
+        btnManageInsurances.setText("Manage Drugs");
         btnManageInsurances.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageInsurancesActionPerformed(evt);

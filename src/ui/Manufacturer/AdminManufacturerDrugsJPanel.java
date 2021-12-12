@@ -57,8 +57,10 @@ public class AdminManufacturerDrugsJPanel extends javax.swing.JPanel {
         ManufacturerEnterprise ent = (ManufacturerEnterprise)this.enterprise;
         this.drugs = ent.getAllDrugs().getDrugDirectory();
         for (Drug drug : drugs) {
-            Object[] row = new Object[1];
+            Object[] row = new Object[3];
             row[0] = drug.getDrugName();
+            row[1] = drug.getCost();
+            row[2] = drug.getQuantity();
             model.addRow(row);
         }
     }
@@ -90,20 +92,20 @@ public class AdminManufacturerDrugsJPanel extends javax.swing.JPanel {
 
         tblDrugs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Drug Name"
+                "Drug Name", "Cost", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false
+                false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
