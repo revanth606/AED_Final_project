@@ -54,6 +54,8 @@ public class InsuranceAdminJPanel extends javax.swing.JPanel {
         btnManageInsurances = new javax.swing.JButton();
         btnManageRefills = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(241, 235, 218));
+
         btnManageVisit.setText("Manage Visit Requests");
         btnManageVisit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

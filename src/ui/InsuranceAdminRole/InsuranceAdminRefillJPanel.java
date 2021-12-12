@@ -4,20 +4,12 @@
  */
 package ui.InsuranceAdminRole;
 
-import ui.AdministrativeRole.*;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
-import Business.Enterprise.Enterprise.EnterpriseType;
-import Business.Enterprise.PharmacyEnterprise;
-import Business.Medication.Drug;
 import Business.Network.Network;
 import Business.Organization.Organization;
-import Business.Organization.OrganizationDirectory;
-import Business.Organization.UserOrganization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.VisitQueue;
-import Business.WorkQueue.VisitRequest;
-import Business.WorkQueue.WorkRequest;
+import Business.WorkQueue.RefillRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -28,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jessi
  */
-public class InsuranceAdminVisitJPanel extends javax.swing.JPanel {
+public class InsuranceAdminRefillJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private Organization organization;
@@ -36,11 +28,11 @@ public class InsuranceAdminVisitJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Network network;
     private EcoSystem system;
-    private ArrayList<VisitRequest> currvq;
+    private ArrayList<RefillRequest> currvq;
     /**
      * Creates new form UserVisitDoctorJPanel
      */
-    public InsuranceAdminVisitJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+    public InsuranceAdminRefillJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -56,17 +48,14 @@ public class InsuranceAdminVisitJPanel extends javax.swing.JPanel {
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblVisits.getModel();
         model.setRowCount(0);
-        ArrayList<VisitRequest> vq = system.getVisitQueue().getVisitQueue();
+        ArrayList<RefillRequest> vq = system.getVisitQueue().getVisitQueue();
         String curragent = enterprise.getName();
         currvq = new ArrayList<>();
-        for (VisitRequest req : vq) {
-            if (req.getAgentName()!=null && req.getAgentName().equals(curragent)) {
-                Object[] row = new Object[5];
+        for (RefillRequest req : vq) {
+            if (req.getInsurance().getName().equals(curragent)) {
+                Object[] row = new Object[2];
                 row[0] = req.getRequestId();
                 row[1] = req.getStatus();
-                row[2] = req.getDocUserName();
-                row[3] = req.getSalesPersonComment();
-                row[4] = req.getSalesPersonName();
                 model.addRow(row);
                 currvq.add(req);
             }
@@ -100,6 +89,7 @@ public class InsuranceAdminVisitJPanel extends javax.swing.JPanel {
         jcbAgents = new javax.swing.JComboBox();
         lblAgent = new javax.swing.JLabel();
         btnAssginSalesPerson = new javax.swing.JButton();
+        btnReject = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(241, 235, 218));
@@ -148,6 +138,13 @@ public class InsuranceAdminVisitJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnReject.setText("Reject");
+        btnReject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRejectActionPerformed(evt);
+            }
+        });
+
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +161,8 @@ public class InsuranceAdminVisitJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBack)
-                        .addGap(341, 341, 341))
+                        .addGap(259, 259, 259)
+                        .addComponent(btnReject))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblAgent)
                         .addGap(93, 93, 93)
@@ -178,7 +176,9 @@ public class InsuranceAdminVisitJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(btnBack)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(btnReject))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -190,14 +190,31 @@ public class InsuranceAdminVisitJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
+        int selectedRowIndex = tblVisits.getSelectedRow();
+        if (selectedRowIndex < 0){
+            JOptionPane.showMessageDialog(this, "Request not selected");
+            return;
+        }
+        RefillRequest vq = currvq.get(selectedRowIndex);
+        vq.setStatus("Request rejected by Insurance Admin");
+        populateTable();
+    }//GEN-LAST:event_btnRejectActionPerformed
+
     private void btnAssginSalesPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssginSalesPersonActionPerformed
         int selectedRowIndex = tblVisits.getSelectedRow();
         if (selectedRowIndex < 0){
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
-        VisitRequest vq = currvq.get(selectedRowIndex);
-        vq.setAgentComment(jcbAgents.getSelectedItem().toString());
+        RefillRequest vq = currvq.get(selectedRowIndex);
+        ArrayList<Organization> reqoOrgs = enterprise.getOrganizationsbyType(Organization.Type.InsuranceAgent.getValue());
+        for(Organization org:reqoOrgs){
+            UserAccount ua = org.getUserAccountDirectory().getUserAccountbyUserName(jcbAgents.getSelectedItem().toString());
+            if(ua!=null){
+                vq.setAgent(ua);
+            }
+        }
         vq.setStatus("Agent assigned");
         populateTable();
     }//GEN-LAST:event_btnAssginSalesPersonActionPerformed
@@ -216,6 +233,7 @@ public class InsuranceAdminVisitJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssginSalesPerson;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnReject;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jcbAgents;
     private javax.swing.JLabel lblAgent;

@@ -98,6 +98,9 @@ public class InsuranceAdminInsuranceJPanel extends javax.swing.JPanel {
         btnReject = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
+
         tblVisits.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -126,72 +129,51 @@ public class InsuranceAdminInsuranceJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblVisits);
 
+        add(jScrollPane1);
+        jScrollPane1.setBounds(55, 97, 438, 97);
+
         jcbAgents.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbAgents.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbAgentsActionPerformed(evt);
             }
         });
+        add(jcbAgents);
+        jcbAgents.setBounds(185, 223, 130, 27);
 
         lblAgent.setText("Agent");
+        add(lblAgent);
+        lblAgent.setBounds(55, 227, 37, 16);
 
+        btnAssginSalesPerson.setBackground(new java.awt.Color(0, 153, 255));
         btnAssginSalesPerson.setText("Assign");
         btnAssginSalesPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssginSalesPersonActionPerformed(evt);
             }
         });
+        add(btnAssginSalesPerson);
+        btnAssginSalesPerson.setBounds(406, 222, 87, 29);
 
+        btnReject.setBackground(new java.awt.Color(255, 102, 102));
         btnReject.setText("Reject");
         btnReject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRejectActionPerformed(evt);
             }
         });
+        add(btnReject);
+        btnReject.setBounds(411, 42, 82, 29);
 
+        btnBack.setBackground(new java.awt.Color(153, 153, 0));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addGap(259, 259, 259)
-                        .addComponent(btnReject))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblAgent)
-                        .addGap(93, 93, 93)
-                        .addComponent(jcbAgents, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(91, 91, 91)
-                        .addComponent(btnAssginSalesPerson))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(87, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnReject))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAgent)
-                    .addComponent(jcbAgents, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAssginSalesPerson))
-                .addContainerGap(249, Short.MAX_VALUE))
-        );
+        add(btnBack);
+        btnBack.setBounds(55, 42, 97, 29);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
