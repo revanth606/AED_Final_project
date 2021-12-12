@@ -32,7 +32,8 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Network network;
     private EcoSystem system;
-    private ArrayList<VisitRequest> currvq;
+    private ArrayList<VisitRequest> currvq = new ArrayList<>();
+    private VisitRequest cvr;
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
@@ -55,21 +56,19 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         ArrayList<VisitRequest> vq = system.getVisitQueue().getVisitQueue();
         String doc = userAccount.getUsername();
-        currvq = new ArrayList<>();
-        System.out.println(vq);
         for (VisitRequest req : vq) {
-            System.out.println(req.getDocUserName());
             if ((req.getDocUserName()!=null) && (req.getDocUserName().equals(doc))) {
                 Object[] row = new Object[5];
                 row[0] = req.getUserName();
-                row[1] = req.getStatus();
-                row[2] = req.getDocUserName();
-                row[3] = req.getLabUserName();
-                row[4] = req.getSalesPersonName();
+                row[1] = req.getProblemComment();
+                row[2] = req.getLabComment();
+                row[3] = req.getDocComment();
+                row[4] = req.getStatus();
+                System.out.println(req.getStatus());
                 model.addRow(row);
+                currvq.add(req);
             }
         }
-        currvq = vq;
     }
 
     
@@ -101,20 +100,20 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
 
         tblVisitRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Problem", "Test results", "Doctor comment", "Status"
+                "Username", "Problem", "Test results", "Doctor comment", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -127,10 +126,10 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblVisitRequests);
         if (tblVisitRequests.getColumnModel().getColumnCount() > 0) {
-            tblVisitRequests.getColumnModel().getColumn(0).setResizable(false);
             tblVisitRequests.getColumnModel().getColumn(1).setResizable(false);
             tblVisitRequests.getColumnModel().getColumn(2).setResizable(false);
             tblVisitRequests.getColumnModel().getColumn(3).setResizable(false);
+            tblVisitRequests.getColumnModel().getColumn(4).setResizable(false);
         }
 
         add(jScrollPane1);
@@ -217,12 +216,15 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
 
     private void btnReqTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReqTestActionPerformed
         int selectedRowIndex = tblVisitRequests.getSelectedRow();
+        System.out.println(selectedRowIndex);
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
-        VisitRequest visitrequest = currvq.get(selectedRowIndex);
-        visitrequest.setStatus("Lab requested");
+        cvr = currvq.get(selectedRowIndex);
+        cvr.setStatus("Lab requested");
+        System.out.println(cvr.getStatus());
+        populateRequestTable();
     }//GEN-LAST:event_btnReqTestActionPerformed
 
     private void txtDoctorCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDoctorCommentActionPerformed
@@ -235,9 +237,9 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
-        VisitRequest visitrequest = currvq.get(selectedRowIndex);
+        cvr = currvq.get(selectedRowIndex);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestLabTestJPanel", new DoctorPrescriptionJPanel(userProcessContainer, userAccount, organization, enterprise, network, system, visitrequest));
+        userProcessContainer.add("RequestLabTestJPanel", new DoctorPrescriptionJPanel(userProcessContainer, userAccount, organization, enterprise, network, system, cvr));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnViewPrescriptionActionPerformed
 
@@ -253,21 +255,17 @@ public class DoctorVisitsPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
-        VisitRequest visitrequest = currvq.get(selectedRowIndex);
-        txtDoctorComment.setText(visitrequest.getDocComment());
-        txtLabResult.setText(visitrequest.getLabComment());
+        cvr = currvq.get(selectedRowIndex);
+        txtDoctorComment.setText(cvr.getDocComment());
+        txtLabResult.setText(cvr.getLabComment());
         btnSave.setEnabled(true);
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        int selectedRowIndex = tblVisitRequests.getSelectedRow();
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Request not selected");
-            return;
-        }
-        VisitRequest visitrequest = currvq.get(selectedRowIndex);
-        visitrequest.setDocComment(txtDoctorComment.getText());
+        cvr.setDocComment(txtDoctorComment.getText());
         btnSave.setEnabled(false);
+        populateRequestTable();
+        txtDoctorComment.setText("");
     }//GEN-LAST:event_btnSaveActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

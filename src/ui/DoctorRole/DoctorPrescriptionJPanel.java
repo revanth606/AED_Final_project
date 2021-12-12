@@ -64,8 +64,10 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         ArrayList<Drug> prevpres = vr.getPrescription().getList();
         for (Drug d : prevpres) {
-            Object[] row = new Object[1];
+            Object[] row = new Object[3];
             row[0] = d.getDrugName();
+            row[1] = d.getCost();
+            row[2] = d.getQuantity();
             model.addRow(row);
         }
     }
@@ -83,8 +85,10 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
             }
         }
         for (Drug drug : drugs.getDrugDirectory()) {
-            Object[] row = new Object[1];
+            Object[] row = new Object[3];
             row[0] = drug.getDrugName();
+            row[1] = drug.getCost();
+            row[2] = drug.getQuantity();
             model.addRow(row);
         }
         
@@ -266,7 +270,7 @@ public class DoctorPrescriptionJPanel extends javax.swing.JPanel {
         for (Drug d : dlist) {
             pres.getList().add(d);
         }
-        if (vr.getStatus().equals("Tests available") || vr.getStatus().equals("Medicines prescribed")) {
+        if (vr.getStatus().equals("Test results available") || vr.getStatus().equals("Medicines prescribed")) {
             vr.setPrescription(pres);
             vr.setSalesPersonName(jcbPharmacy.getSelectedItem().toString());
             vr.setStatus("Medicines prescribed");

@@ -80,6 +80,7 @@ public class UserVisitRequestJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPrescription = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(241, 235, 218));
@@ -117,20 +118,20 @@ public class UserVisitRequestJPanel extends javax.swing.JPanel {
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "RequestId", "Problem", "Hospital", "Status"
+                "RequestId", "Problem", "Hospital", "Status", "Doctor Comment", "Test Results"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -144,7 +145,7 @@ public class UserVisitRequestJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(workRequestJTable);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(50, 250, 500, 100);
+        jScrollPane1.setBounds(50, 250, 540, 100);
 
         btnBack.setBackground(new java.awt.Color(153, 153, 0));
         btnBack.setText("<< Back");
@@ -181,20 +182,20 @@ public class UserVisitRequestJPanel extends javax.swing.JPanel {
 
         tblPrescription.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Drug", "Receiver", "Status", "Result"
+                "Drug", "Cost", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -208,7 +209,7 @@ public class UserVisitRequestJPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tblPrescription);
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(50, 370, 500, 97);
+        jScrollPane2.setBounds(50, 390, 500, 97);
 
         jButton1.setText("Delete");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -218,6 +219,10 @@ public class UserVisitRequestJPanel extends javax.swing.JPanel {
         });
         add(jButton1);
         jButton1.setBounds(300, 200, 84, 29);
+
+        jLabel3.setText("Prescription :");
+        add(jLabel3);
+        jLabel3.setBounds(70, 360, 130, 16);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/newvisitbg.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1920, 1080));
@@ -343,6 +348,7 @@ public class UserVisitRequestJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox jcbHospital;

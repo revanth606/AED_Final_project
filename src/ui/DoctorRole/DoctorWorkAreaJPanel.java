@@ -62,7 +62,6 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         valueLabel = new javax.swing.JLabel();
         btnVisits = new javax.swing.JButton();
         btnInsurances = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(241, 235, 218));
@@ -97,16 +96,6 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         add(btnInsurances);
         btnInsurances.setBounds(189, 166, 145, 29);
 
-        btnBack.setBackground(new java.awt.Color(153, 153, 0));
-        btnBack.setText("<< Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        add(btnBack);
-        btnBack.setBounds(220, 230, 97, 29);
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/dna.jpg"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1800, 900);
@@ -126,14 +115,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnVisitsActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
-    }//GEN-LAST:event_btnBackActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnInsurances;
     private javax.swing.JButton btnVisits;
     private javax.swing.JLabel enterpriseLabel;
