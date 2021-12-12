@@ -9,6 +9,11 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
+import Business.WorkQueue.WareHouseQueue;
+import Business.WorkQueue.InsuranceQueue;
+import Business.WorkQueue.RefillQueue;
+import Business.WorkQueue.VisitQueue;
+import Business.WorkQueue.VisitRequest;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +24,17 @@ public class EcoSystem extends Organization{
     
     private static EcoSystem business;
     private ArrayList<Network> networkList;
+    private VisitQueue visitQueue = new VisitQueue();
+    private InsuranceQueue insuranceQueue = new InsuranceQueue();
+    private RefillQueue refillQueue = new RefillQueue();
+    private WareHouseQueue bulkQueue = new WareHouseQueue();
+    
+    
+    private EcoSystem(){
+        super(null);
+        networkList = new ArrayList<Network>();
+    }
+    
     public static EcoSystem getInstance(){
         if(business==null){
             business=new EcoSystem();
@@ -36,10 +52,6 @@ public class EcoSystem extends Organization{
         ArrayList<Role> roleList=new ArrayList<Role>();
         roleList.add(new SystemAdminRole());
         return roleList;
-    }
-    private EcoSystem(){
-        super(null);
-        networkList=new ArrayList<Network>();
     }
 
     public ArrayList<Network> getNetworkList() {
@@ -59,4 +71,37 @@ public class EcoSystem extends Organization{
         }
         return true;
     }
+
+    public VisitQueue getVisitQueue() {
+        return visitQueue;
+    }
+
+    public void setVisitQueue(VisitQueue visitQueue) {
+        this.visitQueue = visitQueue;
+    }
+    
+    public InsuranceQueue getInsuranceQueue() {
+        return insuranceQueue;
+    }
+
+    public void setInsuranceQueue(InsuranceQueue insuranceQueue) {
+        this.insuranceQueue = insuranceQueue;
+    }
+
+    public RefillQueue getRefillQueue() {
+        return refillQueue;
+    }
+
+    public void setRefillQueue(RefillQueue refillQueue) {
+        this.refillQueue = refillQueue;
+    }
+
+    public WareHouseQueue getWareHouseQueue() {
+        return bulkQueue;
+    }
+
+    public void setWareHosueQueue(WareHouseQueue bulkQueue) {
+        this.bulkQueue = bulkQueue;
+    }
+    
 }

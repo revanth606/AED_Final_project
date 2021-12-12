@@ -49,4 +49,14 @@ public class UserAccountDirectory {
         }
         return true;
     }
+    
+    public UserAccount getUserAccountbyUserName(String userName){
+        for(UserAccount ua : userAccountList){
+            if(ua.getUsername().equals(userName)){
+                UserAccount requiredUa = ua;
+                return requiredUa;
+            }
+        }
+        return null;
+    }
 }
