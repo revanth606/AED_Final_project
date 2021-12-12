@@ -43,7 +43,7 @@ public class AdminPharmacyOrderJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.network = network;
         this.system = system;
-        //populateReqTable();
+        populateReqTable();
         populateCombo();
     }
     
@@ -246,13 +246,12 @@ public class AdminPharmacyOrderJPanel extends javax.swing.JPanel {
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         int rowIndex = tblManu.getSelectedRow();
-        WarehouseRequest wr = new WarehouseRequest();
         if (rowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Manufacturer not selected");
             return;
         }
+        WarehouseRequest wr = new WarehouseRequest();
         system.getWareHouseQueue().getWareHouseQueue().add(wr);
-        System.out.println(rowIndex);
         wr.setManufacturerName(manufacturers.get(rowIndex).getName());
         populateReqTable();
     }//GEN-LAST:event_btnOrderActionPerformed

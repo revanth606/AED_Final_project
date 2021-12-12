@@ -62,13 +62,12 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         String currpharmacy = enterprise.getName();
         currvq = new ArrayList<>();
         for (VisitRequest req : vq) {
-            if (req.getSalesPersonName().equals(currpharmacy)) {
-                Object[] row = new Object[5];
+            if (req.getSalesPersonName() != null && req.getSalesPersonName().equals(currpharmacy)) {
+                Object[] row = new Object[4];
                 row[0] = req.getUserName();
-                row[1] = req.getStatus();
-                row[2] = req.getDocUserName();
-                row[3] = req.getSalesPersonComment();
-                row[4] = req.getSalesPersonName();
+                row[1] = req.getDocUserName();
+                row[2] = req.getSalesPersonComment();
+                row[3] = req.getStatus();
                 model.addRow(row);
                 currvq.add(req);
             }
@@ -111,20 +110,20 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
 
         tblVisits.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "RequestId", "Status", "Doc", "Lab", "Salesguy"
+                "User", "Doctor", "SalesPerson", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

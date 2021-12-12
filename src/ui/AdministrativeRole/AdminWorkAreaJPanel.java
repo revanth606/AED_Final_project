@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import ui.DeliveryAdmin.DeliveryWorkAreaJPanel;
 import ui.HospitalAdminRole.HospitalAdminJPanel;
 import ui.InsuranceAdminRole.InsuranceAdminJPanel;
+import ui.Manufacturer.ManufacturerAdminJPanel;
 
 /**
  *
@@ -201,7 +202,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
         } else if (enterprise.getEnterpriseType().getValue().equals("Manufacturer")) {
-            AdminPharmacyJPanel ap = new AdminPharmacyJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+            ManufacturerAdminJPanel ap = new ManufacturerAdminJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
             userProcessContainer.add("adminPharmacyJPanel", ap);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);

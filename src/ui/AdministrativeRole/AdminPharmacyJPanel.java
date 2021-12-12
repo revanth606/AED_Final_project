@@ -48,6 +48,7 @@ public class AdminPharmacyJPanel extends javax.swing.JPanel {
         btnManageRequests = new javax.swing.JButton();
         btnAssignSalesPerson = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(241, 235, 218));
@@ -64,14 +65,14 @@ public class AdminPharmacyJPanel extends javax.swing.JPanel {
         btnManageRequests.setBounds(200, 150, 170, 29);
 
         btnAssignSalesPerson.setBackground(new java.awt.Color(0, 153, 153));
-        btnAssignSalesPerson.setText("Assign Sales Person");
+        btnAssignSalesPerson.setText("Manage Visits");
         btnAssignSalesPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssignSalesPersonActionPerformed(evt);
             }
         });
         add(btnAssignSalesPerson);
-        btnAssignSalesPerson.setBounds(200, 85, 170, 29);
+        btnAssignSalesPerson.setBounds(200, 60, 170, 29);
 
         jButton1.setBackground(new java.awt.Color(0, 153, 153));
         jButton1.setText("Order Drugs");
@@ -82,6 +83,15 @@ public class AdminPharmacyJPanel extends javax.swing.JPanel {
         });
         add(jButton1);
         jButton1.setBounds(200, 217, 170, 29);
+
+        jButton2.setText("Manage Refills");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2);
+        jButton2.setBounds(200, 110, 170, 29);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/tabs2.jpg"))); // NOI18N
         add(jLabel1);
@@ -108,12 +118,20 @@ public class AdminPharmacyJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ManageRefillOrdersJPanel mo = new ManageRefillOrdersJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+        userProcessContainer.add("manageOrdersJPanel", mo);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssignSalesPerson;
     private javax.swing.JButton btnManageRequests;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
     

@@ -48,7 +48,7 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         this.system = system;
         populateDocComboBox();
         populateLabComboBox();
-        populatePharmacyComboBox();
+//        populatePharmacyComboBox();
         populateTable();
     }
     
@@ -97,13 +97,13 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         }
     }
     
-    private void populatePharmacyComboBox() {
-        jcbPharmacy.removeAllItems();
-        ArrayList<Enterprise> enterprises = network.getEnterpriseList(EnterpriseType.Pharmacy);
-        for (Enterprise ent: enterprises) {
-            jcbPharmacy.addItem(ent.getName());
-        }
-    }
+//    private void populatePharmacyComboBox() {
+//        jcbPharmacy.removeAllItems();
+//        ArrayList<Enterprise> enterprises = network.getEnterpriseList(EnterpriseType.Pharmacy);
+//        for (Enterprise ent: enterprises) {
+//            jcbPharmacy.addItem(ent.getName());
+//        }
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,9 +123,6 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         btnAssginLab = new javax.swing.JButton();
         lblLabAssistant = new javax.swing.JLabel();
         jcbLabAssistants = new javax.swing.JComboBox();
-        lblPharmacy = new javax.swing.JLabel();
-        jcbPharmacy = new javax.swing.JComboBox();
-        btnAssginPharmacy = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(241, 235, 218));
@@ -218,24 +215,6 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         add(jcbLabAssistants);
         jcbLabAssistants.setBounds(214, 239, 130, 27);
 
-        lblPharmacy.setText("Pharmacy :");
-        add(lblPharmacy);
-        lblPharmacy.setBounds(95, 315, 68, 16);
-
-        jcbPharmacy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jcbPharmacy);
-        jcbPharmacy.setBounds(214, 311, 130, 27);
-
-        btnAssginPharmacy.setBackground(new java.awt.Color(0, 153, 255));
-        btnAssginPharmacy.setText("Assign");
-        btnAssginPharmacy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssginPharmacyActionPerformed(evt);
-            }
-        });
-        add(btnAssginPharmacy);
-        btnAssginPharmacy.setBounds(406, 310, 87, 29);
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/docgloves.jpg"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1900, 900);
@@ -281,7 +260,7 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
             return;
         }
         VisitRequest vq = currvq.get(selectedRowIndex);
-        if (vq.getStatus().equals("Tests requested") || vq.getStatus().equals("Lab Assistant assigned")) {
+        if (vq.getStatus().equals("Lab requested") || vq.getStatus().equals("Lab Assistant assigned")) {
             vq.setLabUserName(jcbLabAssistants.getSelectedItem().toString());
             vq.setStatus("Lab Assistant assigned");
             JOptionPane.showMessageDialog(this, "Lab Assistant assigned");
@@ -291,38 +270,18 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAssginLabActionPerformed
 
-    private void btnAssginPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssginPharmacyActionPerformed
-        int selectedRowIndex = jtVisitRequest.getSelectedRow();
-        if (selectedRowIndex < 0){
-            JOptionPane.showMessageDialog(this, "Request not selected");
-            return;
-        }
-        VisitRequest vq = currvq.get(selectedRowIndex);
-        if (vq.getStatus().equals("Doctor prescribed") || vq.getStatus().equals("Pharmacy requested")) {
-            vq.setSalesPersonName(jcbPharmacy.getSelectedItem().toString());
-            vq.setStatus("Pharmacy requested");
-            JOptionPane.showMessageDialog(this, "Pharmacy requested");
-            populateTable();
-        } else {
-            JOptionPane.showMessageDialog(this, "Invalid request");
-        }
-    }//GEN-LAST:event_btnAssginPharmacyActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssginDoc;
     private javax.swing.JButton btnAssginLab;
-    private javax.swing.JButton btnAssginPharmacy;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReject;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jcbDoctors;
     private javax.swing.JComboBox jcbLabAssistants;
-    private javax.swing.JComboBox jcbPharmacy;
     private javax.swing.JTable jtVisitRequest;
     private javax.swing.JLabel lblHospital;
     private javax.swing.JLabel lblLabAssistant;
-    private javax.swing.JLabel lblPharmacy;
     // End of variables declaration//GEN-END:variables
 }

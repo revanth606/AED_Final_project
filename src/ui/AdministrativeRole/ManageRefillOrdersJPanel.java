@@ -11,12 +11,8 @@ import Business.Enterprise.PharmacyEnterprise;
 import Business.Medication.Drug;
 import Business.Network.Network;
 import Business.Organization.Organization;
-import Business.Organization.OrganizationDirectory;
-import Business.Organization.UserOrganization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.VisitQueue;
-import Business.WorkQueue.VisitRequest;
-import Business.WorkQueue.WorkRequest;
+import Business.WorkQueue.RefillRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -27,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jessi
  */
-public class AdminInsuranceJPanel extends javax.swing.JPanel {
+public class ManageRefillOrdersJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private Organization organization;
@@ -36,11 +32,11 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
     private Network network;
     private EcoSystem system;
     private ArrayList<Drug> drugs;
-    private ArrayList<VisitRequest> currvq;
+    private ArrayList<RefillRequest> currvq;
     /**
      * Creates new form UserVisitDoctorJPanel
      */
-    public AdminInsuranceJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+    public ManageRefillOrdersJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -49,37 +45,42 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.network = network;
         this.system = system;
+        PharmacyEnterprise ent = (PharmacyEnterprise)this.enterprise;
+        this.drugs = ent.getAllDrugs().getDrugDirectory();
         populateTable();
-        populateAgentComboBox();
+        populateSalesPersonComboBox();
     }
     
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblVisits.getModel();
         model.setRowCount(0);
-        ArrayList<VisitRequest> vq = system.getVisitQueue().getVisitQueue();
-        String curragent = enterprise.getName();
+        ArrayList<RefillRequest> vq = system.getVisitQueue().getVisitQueue();
+        String currpharmacy = enterprise.getName();
         currvq = new ArrayList<>();
-        for (VisitRequest req : vq) {
-            if (req.getAgentName().equals(curragent)) {
-                Object[] row = new Object[5];
-                row[0] = req.getUserName();
-                row[1] = req.getStatus();
-                row[2] = req.getDocUserName();
-                row[3] = req.getSalesPersonComment();
-                row[4] = req.getSalesPersonName();
+        for (RefillRequest req : vq) {
+            if (req.getSalesPerson() != null && req.getSalesPerson().getEmployee().getName().equals(currpharmacy)) {
+                Object[] row = new Object[4];
+                if (req.getUser()!=null) {
+                    row[0] = req.getUser().getEmployee().getName();
+                }
+                if (req.getSalesPerson()!=null) {
+                    row[1] = req.getSalesPerson().getEmployee().getName();
+                }
+                row[2] = req.getSalesPersonComment();
+                row[3] = req.getStatus();
                 model.addRow(row);
                 currvq.add(req);
             }
         }
     }
     
-    private void populateAgentComboBox() {
-        jcbAgents.removeAllItems();
+    private void populateSalesPersonComboBox() {
+        jcbSalesPersons.removeAllItems();
         ArrayList<Organization> orgdir = enterprise.getOrganizationDirectory().getOrganizationList();
         for (Organization org: orgdir) {
-            if (org.getName().equals("InsuranceAgent Organization")) {
+            if (org.getName().equals("SalesPerson Organization")) {
                 for (UserAccount user : org.getUserAccountDirectory().getUserAccountList()) {
-                    jcbAgents.addItem(user.getEmployee().getName());
+                    jcbSalesPersons.addItem(user.getEmployee().getName());
                 }
             }
         }
@@ -97,29 +98,32 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVisits = new javax.swing.JTable();
-        jcbAgents = new javax.swing.JComboBox();
-        lblAgent = new javax.swing.JLabel();
+        jcbSalesPersons = new javax.swing.JComboBox();
+        lblHospital = new javax.swing.JLabel();
         btnAssginSalesPerson = new javax.swing.JButton();
+        btnReject = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(241, 235, 218));
+        setLayout(null);
 
         tblVisits.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "RequestId", "Status", "Doc", "Lab", "Salesguy"
+                "User", "Doctor", "SalesPerson", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -132,14 +136,16 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblVisits);
 
-        jcbAgents.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcbAgents.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbAgentsActionPerformed(evt);
-            }
-        });
+        add(jScrollPane1);
+        jScrollPane1.setBounds(55, 97, 438, 97);
 
-        lblAgent.setText("Agent");
+        jcbSalesPersons.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jcbSalesPersons);
+        jcbSalesPersons.setBounds(235, 223, 130, 27);
+
+        lblHospital.setText("Sales Person :");
+        add(lblHospital);
+        lblHospital.setBounds(95, 227, 86, 16);
 
         btnAssginSalesPerson.setBackground(new java.awt.Color(0, 153, 255));
         btnAssginSalesPerson.setText("Assign");
@@ -148,6 +154,18 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
                 btnAssginSalesPersonActionPerformed(evt);
             }
         });
+        add(btnAssginSalesPerson);
+        btnAssginSalesPerson.setBounds(406, 222, 87, 29);
+
+        btnReject.setBackground(new java.awt.Color(255, 102, 102));
+        btnReject.setText("Reject");
+        btnReject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRejectActionPerformed(evt);
+            }
+        });
+        add(btnReject);
+        btnReject.setBounds(411, 42, 82, 29);
 
         btnBack.setBackground(new java.awt.Color(153, 153, 0));
         btnBack.setText("<< Back");
@@ -156,44 +174,24 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
+        add(btnBack);
+        btnBack.setBounds(55, 42, 97, 29);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(lblAgent))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack)
-                                .addGap(341, 341, 341))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jcbAgents, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addComponent(btnAssginSalesPerson))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                .addContainerGap(87, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(btnBack)
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAgent)
-                    .addComponent(jcbAgents, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAssginSalesPerson))
-                .addContainerGap(249, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/tabs1.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
+        int selectedRowIndex = tblVisits.getSelectedRow();
+        if (selectedRowIndex < 0){
+            JOptionPane.showMessageDialog(this, "Request not selected");
+            return;
+        }
+        RefillRequest vq = currvq.get(selectedRowIndex);
+        vq.setStatus("Request rejected by HosAdmin");
+        populateTable();
+    }//GEN-LAST:event_btnRejectActionPerformed
 
     private void btnAssginSalesPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssginSalesPersonActionPerformed
         int selectedRowIndex = tblVisits.getSelectedRow();
@@ -201,9 +199,9 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
-        VisitRequest vq = currvq.get(selectedRowIndex);
-        vq.setAgentComment(jcbAgents.getSelectedItem().toString());
-        vq.setStatus("Agent assigned");
+        RefillRequest vq = currvq.get(selectedRowIndex);
+        vq.setSalesPersonComment(jcbSalesPersons.getSelectedItem().toString());
+        vq.setStatus("Salesperson assigned");
         populateTable();
     }//GEN-LAST:event_btnAssginSalesPersonActionPerformed
 
@@ -213,17 +211,15 @@ public class AdminInsuranceJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void jcbAgentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAgentsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbAgentsActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssginSalesPerson;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnReject;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox jcbAgents;
-    private javax.swing.JLabel lblAgent;
+    private javax.swing.JComboBox jcbSalesPersons;
+    private javax.swing.JLabel lblHospital;
     private javax.swing.JTable tblVisits;
     // End of variables declaration//GEN-END:variables
 }
