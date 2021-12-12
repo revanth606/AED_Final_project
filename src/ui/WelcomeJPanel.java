@@ -33,6 +33,7 @@ public class WelcomeJPanel extends javax.swing.JPanel {
 
         jLabel4 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(0, 4, 6));
         setLayout(new java.awt.CardLayout());
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));

@@ -260,7 +260,7 @@ public class ManageVisitsJPanel extends javax.swing.JPanel {
             return;
         }
         VisitRequest vq = currvq.get(selectedRowIndex);
-        if (vq.getStatus().equals("Tests requested") || vq.getStatus().equals("Lab Assistant assigned")) {
+        if (vq.getStatus().equals("Lab requested") || vq.getStatus().equals("Lab Assistant assigned")) {
             vq.setLabUserName(jcbLabAssistants.getSelectedItem().toString());
             vq.setStatus("Lab Assistant assigned");
             JOptionPane.showMessageDialog(this, "Lab Assistant assigned");
