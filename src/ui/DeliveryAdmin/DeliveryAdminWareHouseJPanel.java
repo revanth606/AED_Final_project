@@ -115,7 +115,7 @@ public class DeliveryAdminWareHouseJPanel extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(454, 78, 150, 29);
+        jButton1.setBounds(280, 200, 150, 29);
 
         tblVisits1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -149,7 +149,7 @@ public class DeliveryAdminWareHouseJPanel extends javax.swing.JPanel {
             }
         });
         add(jButton2);
-        jButton2.setBounds(271, 238, 87, 29);
+        jButton2.setBounds(310, 260, 87, 29);
 
         btnBack.setBackground(new java.awt.Color(153, 153, 0));
         btnBack.setText("<< Back");
@@ -159,7 +159,7 @@ public class DeliveryAdminWareHouseJPanel extends javax.swing.JPanel {
             }
         });
         add(btnBack);
-        btnBack.setBounds(454, 238, 97, 29);
+        btnBack.setBounds(20, 20, 97, 29);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/FreightTruck.gif"))); // NOI18N
         add(jLabel1);

@@ -113,7 +113,7 @@ public class DeliveryAdminVisitJPanel extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(454, 78, 150, 29);
+        jButton1.setBounds(280, 210, 150, 29);
 
         tblVisits1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,7 +147,7 @@ public class DeliveryAdminVisitJPanel extends javax.swing.JPanel {
             }
         });
         add(jButton2);
-        jButton2.setBounds(271, 238, 87, 29);
+        jButton2.setBounds(310, 260, 87, 29);
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +156,7 @@ public class DeliveryAdminVisitJPanel extends javax.swing.JPanel {
             }
         });
         add(btnBack);
-        btnBack.setBounds(454, 238, 97, 29);
+        btnBack.setBounds(20, 20, 97, 29);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/FreightTruck.gif"))); // NOI18N
         add(jLabel1);
@@ -181,10 +181,12 @@ public class DeliveryAdminVisitJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblVisits1.getModel();
         model.setRowCount(0);
         for(Organization org: drivers){
-             Object[] row = new Object[2];
-             row[0] = selectedRowIndex;
-             row[1] = org.getName();
-             model.addRow(row);
+            for(UserAccount u : org.getUserAccountDirectory().getUserAccountList()) {
+                Object[] row = new Object[2];
+                row[0] = selectedRowIndex;
+                row[1] = u.getUsername();
+                model.addRow(row);
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -197,7 +199,7 @@ public class DeliveryAdminVisitJPanel extends javax.swing.JPanel {
         String driver = tblVisits1.getValueAt(selectedRowIndex, 1).toString();
         int requestIndex = (int)tblVisits1.getValueAt(selectedRowIndex, 0);
         VisitRequest mr = currmq.get(selectedRowIndex);
-        mr.setStatus("Out for Delivery");
+        mr.setStatus("Driver assigned");
         mr.setDeliveryComment(driver);
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -228,10 +230,10 @@ public class DeliveryAdminVisitJPanel extends javax.swing.JPanel {
         currmq = new ArrayList<>();
         for (VisitRequest req : rq) {
             if (req.getDeliveryName() != null && req.getDeliveryName().equals(enterprise.getName())) {
-                Object[] row = new Object[5];
+                Object[] row = new Object[3];
                 row[0] = req.getRequestId();
                 row[1] = req.getStatus();
-                row[2] = req.getSalesPersonComment();
+                row[2] = req.getUserName();
                 model.addRow(row);
                 currmq.add(req);
             }
