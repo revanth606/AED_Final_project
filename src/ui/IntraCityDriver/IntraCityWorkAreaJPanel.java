@@ -74,10 +74,6 @@ public class IntraCityWorkAreaJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVisits = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         btnAssginInsurance1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -115,28 +111,6 @@ public class IntraCityWorkAreaJPanel extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(72, 114, 432, 97);
 
-        jLabel2.setText("Comment :");
-        add(jLabel2);
-        jLabel2.setBounds(72, 283, 69, 16);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        add(jTextField1);
-        jTextField1.setBounds(194, 278, 290, 26);
-
-        jButton1.setBackground(new java.awt.Color(0, 153, 255));
-        jButton1.setText("View");
-        add(jButton1);
-        jButton1.setBounds(134, 330, 75, 29);
-
-        jButton2.setBackground(new java.awt.Color(0, 153, 255));
-        jButton2.setText("Save");
-        add(jButton2);
-        jButton2.setBounds(270, 330, 75, 29);
-
         btnAssginInsurance1.setBackground(new java.awt.Color(0, 153, 255));
         btnAssginInsurance1.setText("Deliver");
         btnAssginInsurance1.addActionListener(new java.awt.event.ActionListener() {
@@ -145,20 +119,16 @@ public class IntraCityWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         add(btnAssginInsurance1);
-        btnAssginInsurance1.setBounds(410, 330, 88, 29);
+        btnAssginInsurance1.setBounds(400, 250, 88, 29);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/FreightTruck.gif"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1900, 900);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void btnAssginInsurance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssginInsurance1ActionPerformed
         int selectedRowIndex = tblVisits.getSelectedRow();
-        if (selectedRowIndex < 0){
+        if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Request not selected");
             return;
         }
@@ -170,12 +140,8 @@ public class IntraCityWorkAreaJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssginInsurance1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblVisits;
     // End of variables declaration//GEN-END:variables
 }

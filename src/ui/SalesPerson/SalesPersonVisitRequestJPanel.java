@@ -57,9 +57,9 @@ public class SalesPersonVisitRequestJPanel extends javax.swing.JPanel {
                 Object[] row = new Object[5];
                 row[0] = req.getRequestId();
                 row[1] = req.getStatus();
-                row[2] = req.getDocUserName();
-                row[3] = req.getLabUserName();
-                row[4] = req.getSalesPersonName();
+                row[2] = req.getUserName();
+                row[3] = req.getInsuranceAgent();
+                row[4] = req.getDeliveryName();
                 model.addRow(row);
                 currvq.add(req);
             }
@@ -114,14 +114,14 @@ public class SalesPersonVisitRequestJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "RequestId", "Status", "Doctor", "LabAsst", "Hospital"
+                "RequestId", "Status", "Username", "Insurance", "Delivery"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -206,8 +206,9 @@ public class SalesPersonVisitRequestJPanel extends javax.swing.JPanel {
         }
         VisitRequest vq = currvq.get(selectedRowIndex);
         vq.setAgentName(jcbInsurance.getSelectedItem().toString());
-        vq.setStatus("Waiting for Insurance approval");
+        vq.setStatus("Insurance assigned");
         populateTable();
+        JOptionPane.showMessageDialog(this, "Insurance requested");
     }//GEN-LAST:event_btnAssginInsuranceActionPerformed
 
     private void btnAssginDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssginDeliveryActionPerformed
@@ -217,9 +218,14 @@ public class SalesPersonVisitRequestJPanel extends javax.swing.JPanel {
             return;
         }
         VisitRequest vq = currvq.get(selectedRowIndex);
-        vq.setDeliveryName(jcbDelivery.getSelectedItem().toString());
-        vq.setStatus("Sent to Delivery");
-        populateTable();
+        if (vq.getStatus().equals("Delivery assigned") || vq.getStatus().equals("Insurance approved") || vq.getStatus().equals("Insurance rejected")) {
+            vq.setDeliveryName(jcbDelivery.getSelectedItem().toString());
+            vq.setStatus("Delivery assigned");
+            populateTable();
+            JOptionPane.showMessageDialog(this, "Delivery assigned");
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid Request");
+        }
     }//GEN-LAST:event_btnAssginDeliveryActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

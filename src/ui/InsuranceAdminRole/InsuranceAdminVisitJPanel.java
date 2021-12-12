@@ -200,6 +200,7 @@ public class InsuranceAdminVisitJPanel extends javax.swing.JPanel {
         vq.setAgentComment(jcbAgents.getSelectedItem().toString());
         vq.setStatus("Agent assigned");
         populateTable();
+        JOptionPane.showMessageDialog(this, "Agent assigned");
     }//GEN-LAST:event_btnAssginSalesPersonActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

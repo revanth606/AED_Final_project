@@ -71,6 +71,11 @@ public class InsuranceAdminJPanel extends javax.swing.JPanel {
         });
 
         btnManageRefills.setText("Manage Refill Request");
+        btnManageRefills.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageRefillsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -112,6 +117,14 @@ public class InsuranceAdminJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageInsurancesActionPerformed
+
+    private void btnManageRefillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRefillsActionPerformed
+        InsuranceAdminRefillJPanel insins = new InsuranceAdminRefillJPanel(userProcessContainer, userAccount, organization, enterprise, network, system);
+        userProcessContainer.add("insins", insins);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageRefillsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

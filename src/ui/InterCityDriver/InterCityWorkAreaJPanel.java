@@ -77,10 +77,6 @@ public class InterCityWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVisits = new javax.swing.JTable();
         btnAssginInsurance = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(197, 228, 246));
@@ -125,29 +121,7 @@ public class InterCityWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         add(btnAssginInsurance);
-        btnAssginInsurance.setBounds(410, 330, 88, 29);
-
-        jLabel1.setText("Comment :");
-        add(jLabel1);
-        jLabel1.setBounds(72, 283, 69, 16);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        add(jTextField1);
-        jTextField1.setBounds(194, 278, 290, 26);
-
-        jButton1.setBackground(new java.awt.Color(0, 153, 255));
-        jButton1.setText("View");
-        add(jButton1);
-        jButton1.setBounds(134, 330, 75, 29);
-
-        jButton2.setBackground(new java.awt.Color(0, 153, 255));
-        jButton2.setText("Save");
-        add(jButton2);
-        jButton2.setBounds(270, 330, 75, 29);
+        btnAssginInsurance.setBounds(410, 240, 88, 29);
 
         jLabel2.setBackground(new java.awt.Color(197, 228, 246));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/FreightTruck.gif"))); // NOI18N
@@ -166,19 +140,11 @@ public class InterCityWorkAreaJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_btnAssginInsuranceActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssginInsurance;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblVisits;
     // End of variables declaration//GEN-END:variables
 }

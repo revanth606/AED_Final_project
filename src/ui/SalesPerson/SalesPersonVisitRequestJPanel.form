@@ -41,9 +41,9 @@
               <Table columnCount="5" rowCount="4">
                 <Column editable="false" title="RequestId" type="java.lang.String"/>
                 <Column editable="false" title="Status" type="java.lang.String"/>
-                <Column editable="false" title="Doctor" type="java.lang.String"/>
-                <Column editable="true" title="LabAsst" type="java.lang.String"/>
-                <Column editable="true" title="Hospital" type="java.lang.String"/>
+                <Column editable="false" title="Username" type="java.lang.String"/>
+                <Column editable="false" title="Insurance" type="java.lang.String"/>
+                <Column editable="false" title="Delivery" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
